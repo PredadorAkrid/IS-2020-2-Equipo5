@@ -5,5 +5,5 @@ Profesora: Hanna Jadwiga Oktaba
 ** Lider de equipo: Navarrete Puebla Alexis **  
 ** Responsable calidad: Lopez Hernandez Jesus Haans   **  
 ** Responsable técnico: Lechuga Martínez José Eduardo  **  
-** Responsable colaboración: Daniel  **  
+** Responsable colaboración: Daniel Hernández Hernández **  
   
