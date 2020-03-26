@@ -3,7 +3,7 @@ Repositorio del equipo 5 para el desarrollo del proyecto final de ingeniería de
 Profesora: Hanna Jadwiga Oktaba
 ## Integrantes
 ** Lider de equipo: Navarrete Puebla Alexis **  
-** Responsable calidad: Lopez Hernandez Jesus Haans   **  
+** Responsable calidad: NA   **  
 ** Responsable técnico: Lechuga Martínez José Eduardo  **  
-** Responsable colaboración: Daniel Hernández Hernández **  
+** Responsable colaboración: NA **  
   
