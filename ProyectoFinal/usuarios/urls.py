@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 # Views
-app_name = "users"
+app_name = "usuarios"
 
 from users import views
 
