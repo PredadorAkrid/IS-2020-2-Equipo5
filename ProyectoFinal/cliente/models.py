@@ -21,7 +21,8 @@ class Direccion(models.Model):
 	descripcion_direccion = models.CharField(max_length=200)
 	class Meta:
 		db_table = 'direccion'
-		unique_together = (('id_cliente', 'descripcion_direccion' ),)
+		unique_together = (('id_cliente', 'descripcion_direccion' ))
+
 
 
 
