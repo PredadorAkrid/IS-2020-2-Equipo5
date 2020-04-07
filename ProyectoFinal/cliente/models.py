@@ -39,6 +39,8 @@ class Cliente(models.Model):
         return str(self.user)
     class Meta:
         db_table = 'cliente'
+    
+            
 class Direccion(models.Model):
     id_direccion = models.IntegerField(primary_key=True)
     id_cliente =  models.ForeignKey(Cliente, models.DO_NOTHING)

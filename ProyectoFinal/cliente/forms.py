@@ -21,11 +21,11 @@ class SignUpForm(UserCreationForm):
 
         
     def save(self, commit=True):
-        username = self.cleaned_data.get('correo')
+        username = self.cleaned_data.get('email')
         first_name = self.cleaned_data.get('nombre')
         last_name = self.cleaned_data.get('paterno')
-        email = self.cleaned_data.get('correo')
-        password = self.cleaned_data.get('contra')
+        email = self.cleaned_data.get('email')
+        password = self.cleaned_data.get('password1')
         #avatar = self.clean_avatar()
         user = User.objects.create_user(username=email, first_name=first_name, last_name=last_name,
                                         email=email, password=password)
