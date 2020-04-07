@@ -6,13 +6,27 @@ from django.contrib.auth.models import *
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 class RegistrarRepartidor(forms.Form):
 
 	nombre = forms.CharField(max_length=64)
     paterno = forms.CharField(max_length=100)
     materno = forms.CharField(max_length=100, required=False)
     correo = forms.EmailField(max_length=254)
-    password = forms.CharField(max_length=16)
 
 	def clean_correo(self):
 		"""Valida que el correo no exista en la base de datos"""
@@ -21,3 +35,4 @@ class RegistrarRepartidor(forms.Form):
 			raise forms.ValidationError("Este correo ya existe para un repartidor")
 
 		return data
+'''

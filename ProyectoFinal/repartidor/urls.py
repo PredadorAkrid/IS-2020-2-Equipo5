@@ -4,7 +4,7 @@ from django.conf.urls import url,include
 from .views import *
 
 app_name = "repartidor"
-
+'''
 urlpatterns = [
     
 	#temporal, no se llamarán así las vistas
@@ -15,3 +15,4 @@ urlpatterns = [
 
 
 ]
+'''

@@ -1,8 +1,8 @@
 from django.urls import path
 from django.conf.urls import url,include
-from .views import *
 app_name = "administrador"
 
+'''
 urlpatterns = [
     
 	#temporal, no se llamarán así las vistas
@@ -13,3 +13,4 @@ urlpatterns = [
 
 
 ]
+'''

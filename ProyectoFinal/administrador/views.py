@@ -19,3 +19,23 @@ class Index(View):
         return render(request, 'index.html')
     def post(self, request):
         return HttpResponseForbidden()
+
+
+
+'''
+Forma 1:
+
+from django.contrib.auth.decorators import user_passes_test
+
+@user_passes_test(lambda u: u.is_superuser)
+def foo_view(request):
+
+Forma 2:
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+
+@login_required
+def foo_view(request):
+   if not request.user.is_superuser:
+       return HttpResponse('The user is not superuser')
+'''
