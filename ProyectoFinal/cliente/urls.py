@@ -1,17 +1,10 @@
 from django.urls import path
 from django.conf.urls import url,include
-
+from .views import *
 from cliente import views
-
 app_name = "cliente"
 
+
 urlpatterns = [
-    
-	#temporal, no se llamarán así las vistas
-   	path("", views.Index.as_view(), name="Index"),
-    #path("top-songs", views.TopSongs.as_view(), name="top-songs"),
-    
-    #path("artist/create-artist", views.AddArtist.as_view(), name="add_artist"),
-
-
+   	path("registro-cliente/", views.RegistroCliente.as_view(), name="registro_cliente"),
 ]
