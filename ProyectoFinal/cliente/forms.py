@@ -5,6 +5,9 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import * 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 class SignUpForm(UserCreationForm):
     """Sign up new user form."""
     nombre = forms.CharField(max_length=64)
@@ -35,3 +38,28 @@ class SignUpForm(UserCreationForm):
             #return user
             pass
         return user
+class InicioSesionForm(AuthenticationForm):
+
+    """Login form."""
+
+    def clean(self):
+        """Validate data.
+        Validating all fields.
+        """
+        usuario = self.data["usuario"]
+        clave = self.data["clave"]
+        if ( (Repartidor.objects.filter(username=usuario).count() != 0)):
+            self.add_error(
+                "usuario", forms.ValidationError("No es un cliente")
+            )
+        elif ( (User.objects.filter(username=usuario).count() == 0)):
+            self.add_error(
+                "usuario", forms.ValidationError("Éste correo no existe")
+            )
+
+
+        # authenticate search for the user with that username and password.
+        # authenticate do not log any user.
+        user = authenticate(username=usuario, password=clave)
+        if user is None:
+            self.add_error("clave", forms.ValidationError("Contraseña inválida"))
