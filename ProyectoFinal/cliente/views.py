@@ -21,12 +21,12 @@ class RegistroCliente(View):
         form = SignUpForm()
         print(form)
         context = {"form": form}
-        return render(request, 'usuarios/registro_cliente.html', context)  
+        return render(request, 'cliente/registro_cliente.html', context)  
     def post(self, request):
         form = SignUpForm(request.POST)
         if not form.is_valid():
             context = {"form": form}
-            return render(request, 'usuarios/registro_cliente.html', context)
+            return render(request, 'cliente/registro_cliente.html', context)
         
         user = form.save(commit=False)
         user.is_active = False
@@ -40,3 +40,9 @@ class RegistroCliente(View):
         )
         user2.save()
         return HttpResponse("<h1>Cliente creado</h1>")
+
+class Index(View):
+    def get(self, request):
+        return render(request, 'cliente/index.html')
+    def post(self, request):
+        return HttpResponseForbidden()

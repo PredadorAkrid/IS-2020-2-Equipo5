@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cliente', 
     'repartidor',
     'administrador',
+    'platillo',
     
     
 ]
