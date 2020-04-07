@@ -10,6 +10,6 @@ app_name = "usuarios"
 from usuarios import views
 
 urlpatterns = [
-    path('usuarios', views.Index.as_view(), name='platillo'),
+    path('usuarios', views.Index.as_view(), name='usuarios'),
 
 ]
