@@ -25,5 +25,6 @@ urlpatterns = [
     path('', include('administrador.urls')),
     path('', include("cliente.urls")),
     path('', include("repartidor.urls")),
+    path('', include("platillo.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
