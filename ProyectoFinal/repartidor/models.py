@@ -16,5 +16,5 @@ class Repartidor(models.Model):
 		return self.nombre_repartidor + " " + self.apellido_paterno_repartidor
 
 	def __repr__(self):
-		"""Get str representation"""
+		"""Representación en cadena de un Repartidor"""
 		return self.__str__()
