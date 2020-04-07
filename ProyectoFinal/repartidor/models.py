@@ -36,3 +36,4 @@ class Repartidor(models.Model):
 		return self.nombre_repartidor + " " + self.apellido_paterno_repartidor
 	class Meta:
 		db_table = 'repartidor'
+		verbose_name_plural = "Repartidores"

@@ -39,7 +39,7 @@ class Cliente(models.Model):
         return str(self.user)
     class Meta:
         db_table = 'cliente'
-    
+        verbose_name_plural = "Clientes"
             
 class Direccion(models.Model):
     id_direccion = models.IntegerField(primary_key=True)
@@ -47,4 +47,5 @@ class Direccion(models.Model):
     descripcion_direccion = models.CharField(max_length=200)
     class Meta:
         db_table = 'direccion'
+        verbose_name_plural = "Direcciones"
         unique_together = (('id_cliente', 'descripcion_direccion' ))

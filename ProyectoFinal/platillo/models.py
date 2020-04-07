@@ -34,6 +34,7 @@ class Platillo(models.Model):
         super(Platillo, self).save(*args, **kwargs)
     class Meta:
         db_table = 'platillo'
+        verbose_name_plural = "Platillos"
     def get_imagen_path(self):
         """Obtenemos la direccion de la imagen"""
         return f"media/{self.imagen.name}"
