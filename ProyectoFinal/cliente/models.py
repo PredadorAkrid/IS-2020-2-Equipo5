@@ -36,7 +36,7 @@ class Cliente(models.Model):
     apellido_ma_cliente = models.CharField(max_length=100)
     telefono_cliente = models.CharField(max_length=10) 
     def __str__(self):
-        return str(self.user)
+        return str(self.user_cliente)
     class Meta:
         db_table = 'cliente'
         verbose_name_plural = "Clientes"

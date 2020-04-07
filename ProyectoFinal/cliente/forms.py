@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
     paterno = forms.CharField(max_length=100)
     materno = forms.CharField(max_length=100)
     telefono = forms.CharField(max_length=10)
-    field_order = ['nombre', 'paterno','materno',  'telefono', 'email', 'password', 'password2']
+    field_order = ['nombre', 'paterno','materno',  'telefono', 'email', 'password1', 'password2']
     class Meta:
         model = User
         fields = ('email', 'password1', 'password2', )

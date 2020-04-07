@@ -9,7 +9,7 @@ from .models import  *
 from django.contrib.auth import authenticate, login, logout
 
 class Index(View):
-    """Pagina Index para los platillos"""
+    """Pagina Index para los usuarios"""
 
     template = "usuarios/index.html"
 
