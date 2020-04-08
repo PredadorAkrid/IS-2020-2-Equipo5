@@ -18,6 +18,8 @@ class FormularioRegistroRepartidor(UserCreationForm):
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['password1'].required = False
         self.fields['password2'].required = False
+        self.fields['password1'].widget = forms.HiddenInput()
+        self.fields['password2'].widget = forms.HiddenInput()
 
     class Meta:
         model = User

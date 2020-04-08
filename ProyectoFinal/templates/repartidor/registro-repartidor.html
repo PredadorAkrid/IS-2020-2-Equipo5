@@ -13,9 +13,13 @@
 
 			{% for field in form %}
 			<div class="formulario-repartidor-informacion">
-				{{ field.label_tag }}
-				{{ field }}
-				{{ field.errors }}
+
+                {% if not field.is_hidden%}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                {% endif %}
+
 			</div>
 			{% endfor %}
 			<input value="Registrar" type="submit" id="guardar-repartidor-btn">
