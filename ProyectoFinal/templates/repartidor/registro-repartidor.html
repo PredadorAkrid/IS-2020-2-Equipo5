@@ -8,7 +8,7 @@
 	<body>
 		<h1>Registrar un nuevo repartidor</h1>
 
-		<form class="formulario-repartidor" action="./registrar_repartidor" method="post" enctype="multipart/form-data">
+		<form class="formulario-repartidor" action="." method="POST" enctype="multipart/form-data">
 			{% csrf_token %}
 
 			{% for field in form %}

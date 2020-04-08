@@ -3,8 +3,41 @@
 from .models import *
 from django import forms
 from django.contrib.auth.models import *
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+class FormularioRegistroRepartidor(UserCreationForm):
+    """Formulario para registrar un repartidor"""
+    nombre = forms.CharField(max_length=64)
+    paterno = forms.CharField(max_length=100)
+    materno = forms.CharField(max_length=100)
+    field_order = ['nombre', 'paterno', 'materno', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['password1'].required = False
+        self.fields['password2'].required = False
+
+    class Meta:
+        model = User
+        fields = ('email',)
+
+    def save(self, commit=True):
+        username = self.cleaned_data.get('email')
+        first_name = self.cleaned_data.get('nombre')
+        last_name = self.cleaned_data.get('paterno')
+        email = self.cleaned_data.get('email')
+        password = User.objects.make_random_password(length=10)
+        print(password)
+
+        user = User.objects.create_user(username=email, first_name=first_name, last_name=last_name, email=email, password=password)
+
+        if commit:
+            #user.save()
+            #return user
+            pass
+        return user
 
 
 
