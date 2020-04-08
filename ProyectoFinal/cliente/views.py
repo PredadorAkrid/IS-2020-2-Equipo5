@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views import View
 
 # Create your views here.
-##Function based views
 
 from django.shortcuts import render, redirect
 from django.views import View
@@ -10,7 +9,6 @@ from django.http import HttpResponse
 from django.contrib.auth.models import *
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
-
 
 # Create your views here.
 
@@ -70,25 +68,7 @@ class InicioSesion(View):
         login(request, user)
 
         return HttpResponse("<h1>User logged!</h1>")
-    '''
-    def post(self, request):
-        """Receive and validate sign up form."""
-        form = LoginForm(data=request.POST)
-
-        if not form.is_valid():
-            context = {"form": form}
-            return render(request, self.template, context)
-
-        user = authenticate(
-            username=form.cleaned_data["username"],
-            password=form.cleaned_data["password"],
-        )
-        # As simple as telling django the user to login.
-        login(request, user)
-
-        return redirect("music:home")
-
-    '''
+    
 '''
 class LogoutView(View):
     """Logout View."""

@@ -10,7 +10,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth.models import *
 from django.contrib.auth import authenticate, login, logout
-
+from .models import *
 
 ##Class-based-views
 class Index(View):
@@ -19,6 +19,19 @@ class Index(View):
     def post(self, request):
         return HttpResponseForbidden()
 
+class Ordenes(View):
+
+    def get(self,request):
+        ordenes = Orden.objects.all()
+        context = {"ordenes": ordenes}
+
+        
+        #books= zip(ID, bookName, author, copies)
+        return render(request, 'administrador/ordenes.html', context)
+ 		#return render(request, 'allbooks.html',{ "books": books} )
+    def post(self,request):
+        #aquí hay
+        return HttpResponseForbidden()
 
 
 '''

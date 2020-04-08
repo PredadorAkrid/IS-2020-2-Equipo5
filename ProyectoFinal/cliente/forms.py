@@ -39,9 +39,7 @@ class SignUpForm(UserCreationForm):
             pass
         return user
 class InicioSesionForm(AuthenticationForm):
-
     """Login form."""
-
     def clean(self):
         """Validate data.
         Validating all fields.
