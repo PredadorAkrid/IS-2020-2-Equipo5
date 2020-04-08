@@ -89,6 +89,7 @@ class InicioSesion(View):
         return redirect("music:home")
 
     '''
+'''
 class LogoutView(View):
     """Logout View."""
 
@@ -96,4 +97,5 @@ class LogoutView(View):
         """Logout logged user."""
         # As simple as.
         logout(request)
-        return redirect("music:home")
+        return redirect("cliente:home")
+'''
