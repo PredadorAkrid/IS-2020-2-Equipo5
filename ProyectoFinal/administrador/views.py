@@ -10,18 +10,21 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth.models import *
 from django.contrib.auth import authenticate, login, logout
-from .models import *
 
+
+from .models import *
+from .forms import *
 ##Class-based-views
+
 class Index(View):
     def get(self, request):
         return render(request, 'index.html')
     def post(self, request):
         return HttpResponseForbidden()
 
-class Ordenes(View):
-
+class EditarOrdenes(View):
     def get(self,request):
+    	'''
         ordenes = Orden.objects.all()
         context = {"ordenes": ordenes}
 
@@ -29,10 +32,31 @@ class Ordenes(View):
         #books= zip(ID, bookName, author, copies)
         return render(request, 'administrador/ordenes.html', context)
  		#return render(request, 'allbooks.html',{ "books": books} )
+    	'''
+    	#form = OrdenForm()
+    	return render(request,'administrador/ordenes.html', {'form':form} )
     def post(self,request):
         #aquí hay
-        return HttpResponseForbidden()
+        form = OrdenForm(request.POST)
+        if form.is_valid():
+        	form.save()
+        return redirect('orden:Index')	
 
+def lista_ordenes(request):
+	ordenes = Orden.objects.all().order_by('id_orden')
+	contexto = {'ordenes': ordenes}
+	return render(request, 'administrador/lista_ordenes.html',contexto)
+
+
+
+'''
+class EditarOrden(self, request, id):
+	orden = Orden.objects.get(id_orden = id)
+	def get(self, request):
+		form = OrdenForm(instance = mascota)	
+	def post(self, request):
+		pass
+'''
 
 '''
 Forma 1:

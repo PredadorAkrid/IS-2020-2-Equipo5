@@ -7,10 +7,19 @@
 	<link rel="stylesheet" href="">
 </head>
 <body>
+        <!--Esto jala sin el form de ORDEN   
 		<ul>
         {% for orden in ordenes  %}
         <li>{{orden}}</li>
         {% endfor %}
-    </ul>
+        </ul>
+        -->
+        <form method="post" accept-charset="utf-8">
+            {% csrf_token %}
+            {{form.as_p}}
+            {{form.id_cliente}}
+        </form>
+
+    
 </body>
 </html>

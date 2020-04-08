@@ -21,10 +21,9 @@ class Orden(models.Model):
 class EstadoOrden(models.Model):
 	"""docstring for EstadoOrden"""
 	id_estado = models.IntegerField(primary_key=True)
-
 	descripcion_estado = models.CharField(max_length=30)
-
-	
 	class Meta:
 		db_table = 'estado_orden'
 		verbose_name_plural = "EstadosOrden"
+	def __str__(self):
+		return '{}'.format(self.id_estado)
