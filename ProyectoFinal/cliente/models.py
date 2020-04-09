@@ -49,3 +49,5 @@ class Direccion(models.Model):
         db_table = 'direccion'
         verbose_name_plural = "Direcciones"
         unique_together = (('id_cliente', 'descripcion_direccion' ))
+    def __str__(self):
+        return '{}'.format(self.descripcion_direccion)
