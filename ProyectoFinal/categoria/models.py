@@ -8,3 +8,5 @@ class Categoria(models.Model):
 	class Meta:
 		db_table = 'categoria'
 		verbose_name_plural = "Categorias"
+	def __str__(self):
+		return '{}'.format(self.nombre_categoria)

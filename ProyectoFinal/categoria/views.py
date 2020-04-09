@@ -21,3 +21,8 @@ def crear_categoria(request):
 		form = CategoriaForm()
 		context = {"form": form}
 		return render(request, 'categoria/crear_categoria.html', context)  
+def lista_categoria(request):
+	categorias = Categoria.objects.all().order_by('nombre_categoria')
+	print(categorias)
+	contexto = {'categorias': categorias}
+	return render(request, 'categoria/lista_categorias.html',contexto)
