@@ -16,7 +16,7 @@ class OrdenForm(forms.ModelForm):
 	id_repartidor_orden =  forms.IntegerField(required=False, label='Repartidor asignado'),
 	id_estado_orden = forms.IntegerField(required=True, max_value=5, min_value=1, label='Estado entrega'),
 	id_platillo_orden =  forms.MultipleChoiceField(required=True, label='Platillos'),
-	direccion = forms.CharField(required=True, label='Direccion')
+	direccion_entrega_orden = forms.CharField(required=True, label='Direccion')
 	class Meta:
 		model = Orden
 		fields = [
@@ -36,5 +36,6 @@ class OrdenForm(forms.ModelForm):
 			'id_platillo_orden':'Platillos',
 			'direccion_entrega_orden':'Direccion entrega',
 		}
+
 		
 	
