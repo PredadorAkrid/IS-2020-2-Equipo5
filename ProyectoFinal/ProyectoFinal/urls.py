@@ -28,4 +28,6 @@ urlpatterns = [
     path('repartidor/', include('repartidor.urls')),
     path('platillo/', include('platillo.urls')),
     path('usuarios/', include('usuarios.urls')),
+    path('categoria/', include('categoria.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

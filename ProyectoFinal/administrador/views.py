@@ -52,8 +52,6 @@ def eliminar_orden(request,  pk):
 
 
 
-
-
 '''NO ME SIRVIO
 class OrdenList(ListView):
 	model = Orden
@@ -70,15 +68,4 @@ class EditarOrdenes(UpdateView):
 	form_class = OrdenForm
 	template_name = 'administrador/ordenes.html'
 
-'''
-
-
-
-'''
-class EditarOrden(self, request, id):
-	orden = Orden.objects.get(id_orden = id)
-	def get(self, request):
-		form = OrdenForm(instance = mascota)	
-	def post(self, request):
-		pass
 '''
