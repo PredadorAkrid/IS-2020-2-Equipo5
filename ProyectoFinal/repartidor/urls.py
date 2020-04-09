@@ -1,6 +1,6 @@
 from django.conf.urls import url,include
 from django.urls import path
-from repartidor import views
+from . import views
 from .views import *
 
 app_name = "repartidor"

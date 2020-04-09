@@ -39,8 +39,8 @@ class FormularioRegistroRepartidor(UserCreationForm):
             #user.save()
             #return user
             pass
-        return user
-
+        data = {'user' : user, 'cont' : password}
+        return data
 
 
 

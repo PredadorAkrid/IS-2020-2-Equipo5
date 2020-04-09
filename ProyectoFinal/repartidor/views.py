@@ -36,9 +36,10 @@ class RegistroRepartidor(View):
         if not form.is_valid():
             context = {"form": form}
             return render(request, self.template, context)
-        print("El form es válido")
 
-        user = form.save(commit=False)
+        data = form.save(commit=False)
+        user = data["user"]
+        cont = data["cont"]
         user.is_active = False
         user.save()
 
@@ -53,7 +54,8 @@ class RegistroRepartidor(View):
 
         mail_subject = "Registro existoso | Delivery&Eats"
         mail_message = render_to_string("repartidor/registro-repartidor-email.html",{
-            'user' : user,
+            'user' : userRepartidor,
+            'password': cont
         })
         to_email = form.cleaned_data['email']
         email = EmailMessage(mail_subject, mail_message, to=[to_email])

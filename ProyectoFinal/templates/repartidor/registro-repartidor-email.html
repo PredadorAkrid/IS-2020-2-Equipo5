@@ -1,5 +1,6 @@
 {% autoescape off %}
-    Hola {{user.username}}.
-    Tu registro en Delivery&Eats ha sido completado.
-    Tu password para acceder al sitio es: {{user.password}}
+Hola {{user.nombre_repartidor}}.
+Tu registro en Delivery&Eats ha sido completado.
+    Tu usuario es: {{user.user.username}}
+    Tu password es: {{ password }}
 {% endautoescape %}
