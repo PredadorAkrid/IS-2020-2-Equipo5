@@ -16,12 +16,12 @@ class RegistroCliente(View):
     """New User Sign Up."""
     def get(self, request):
         """Render sign up form."""
-        form = SignUpForm()
+        form = ClienteRegistroForm()
         print(form)
         context = {"form": form}
         return render(request, 'cliente/registro_cliente.html', context)  
     def post(self, request):
-        form = SignUpForm(request.POST)
+        form = ClienteRegistroForm(request.POST)
         if not form.is_valid():
             context = {"form": form}
             return render(request, 'cliente/registro_cliente.html', context)
@@ -56,7 +56,7 @@ class InicioSesion(View):
     def post(self, request):
 
         """Receive and validate sign up form."""
-        form = LoginForm(data=request.POST)
+        form = InicioSesionForm(data=request.POST)
         if not form.is_valid():
             context = {"form": form}
             return render(request, self.template, context)
@@ -69,13 +69,8 @@ class InicioSesion(View):
 
         return HttpResponse("<h1>User logged!</h1>")
     
-'''
-class LogoutView(View):
-    """Logout View."""
 
+class CerrarSesion(View):
     def get(self, request):
-        """Logout logged user."""
-        # As simple as.
         logout(request)
-        return redirect("cliente:home")
-'''
+        return redirect("cliente:Index")

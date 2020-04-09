@@ -1,6 +1,8 @@
 from django import forms
 from .models import *
-'''
+
+
+'''Descontinuado 
 class AdminForm(forms.ModelForm):
    	usuario = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput)
@@ -10,6 +12,13 @@ class AdminForm(forms.ModelForm):
       	    'password': forms.PasswordInput()
         }
 '''
+
+
+
+'''
+Formulario para editar las órdenes existentes como administrador
+'''
+
 class OrdenForm(forms.ModelForm):
 	precio_orden =  forms.IntegerField(required=True, label='Precio'),
 	id_cliente_orden =  forms.IntegerField(required=True, label='Cliente'),
@@ -18,7 +27,9 @@ class OrdenForm(forms.ModelForm):
 	id_platillo_orden =  forms.MultipleChoiceField(required=True, label='Platillos'),
 	direccion_entrega_orden = forms.CharField(required=True, label='Direccion')
 	class Meta:
+		#Indicamos el modelo
 		model = Orden
+		#Los campos del modelo
 		fields = [
 			'precio_orden',
 			'id_cliente_orden',
@@ -27,7 +38,7 @@ class OrdenForm(forms.ModelForm):
 			'id_platillo_orden',
 			'direccion_entrega_orden',
 		]			
-
+		#Etiquetas pero no funcionan, se puede borrar
 		labels = {
 			'precio_orden':'Precio final',
 			'id_cliente_orden':'Cliente',
@@ -36,6 +47,5 @@ class OrdenForm(forms.ModelForm):
 			'id_platillo_orden':'Platillos',
 			'direccion_entrega_orden':'Direccion entrega',
 		}
-
 		
 	

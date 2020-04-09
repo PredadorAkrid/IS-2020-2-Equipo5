@@ -18,6 +18,5 @@ class IndexRepartidor(View):
     template = "repartidor/index.html"
 
     def get(self, request):
-        print("llega a repartidores")
         """Metodo Get"""
         return render(request, self.template)

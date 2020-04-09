@@ -9,10 +9,10 @@ urlpatterns = [
     
 	#temporal, no se llamarán así las vistas
    	path("", views.Index.as_view(), name="Index"),
-   	
-    #path("editar-ordenes/", views.EditarOrdenes.as_view(), name="ordenes_administrador"),
-    #path("lista-ordenes/", lista_ordenes, name="listar_ordenes"),
+   	#ruta para listar las ordenes con vistas basadas en funciones
     path("lista-ordenes/", lista_ordenes, name="listar_ordenes"),
+	#ruta para editar una orden, recibe el id de la orden a editar en la url  
     path("editar-ordenes/(?P<pk>d+)/",editar_orden, name="editar_orden"),
+    #ruta para eliminar una orden, recibe el id de la orden a eliminar en la url
     path("eliminar-ordenes/(?P<pk>d+)/",eliminar_orden, name="eliminar_orden"),
 ]
