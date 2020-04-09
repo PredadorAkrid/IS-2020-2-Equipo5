@@ -1,4 +1,6 @@
 from django.db import models
+from categoria  import models 
+from categoria.models import *
 
 # Create your models here.
 def directorio_imagen(instance, filename):
@@ -14,7 +16,7 @@ class Platillo(models.Model):
     descripcion = models.CharField(max_length=500, null=True)
     precio = models.FloatField(null=False, default=0)
     imagen = models.ImageField(null=True, upload_to=directorio_imagen)
-
+    categoria = models.ForeignKey('categoria.Categoria', on_delete=models.CASCADE)
     def __str__(self):
         """Obtiene el nombre del platillo"""
         return self.nombre
