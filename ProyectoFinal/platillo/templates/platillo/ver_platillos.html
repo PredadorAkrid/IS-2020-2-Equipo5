@@ -1,0 +1,11 @@
+<h1>Estos son todos los platillos</h1>
+
+{% for platillo in platillos%}
+    <div id="{{platillo.id}}">
+        {{platillo.id}}
+        {{platillo.nombre}}
+        {{platillo.descripcion}}
+        {{platillo.precio}}
+        <img src="{{platillo.imagen.url}}">
+    </div>
+{% endfor %}

@@ -1,0 +1,12 @@
+<h1>¿Estas seguro que deseas eliminar este platillo?</h1>
+
+{{platillo_original.id}}
+{{platillo_original.nombre}}
+{{platillo_original.descripcion}}
+{{platillo_original.precio}}
+<img src="{{platillo_original.imagen.url}}">
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Si, estoy seguro">
+</form>

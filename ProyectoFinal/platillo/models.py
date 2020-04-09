@@ -13,6 +13,7 @@ def directorio_imagen(instance, filename):
 
 class Platillo(models.Model):
 
+    id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=200, unique=True)
     descripcion = models.CharField(max_length=500, null=True)
     precio = models.FloatField(null=False, default=0)

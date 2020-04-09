@@ -1,0 +1,15 @@
+{% load static %}
+{% comment %} {% block title%}Crear Platillo{% endblock title%} {% endcomment %}
+<title>Crear Platillo</title>
+{% block css %}
+  {% comment %} <link rel="stylesheet" type="text/css" href={% static 'music/css/create_artist.css'%}>  {% endcomment %}
+{% endblock css %}
+
+<h1>Selecciona un platillo</h1>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{formulario}}
+    <input type="submit" name="editar" value="Editar">
+    <input type="submit" name="eliminar" value="Eliminar">
+</form>

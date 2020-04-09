@@ -1,0 +1,9 @@
+<h1> Modifica tu platillo </h1>
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formulario.errors }}
+    {{ formulario.label_tag }}
+    {{ formulario }}
+    <input value="Editar" type="submit">
+</form>

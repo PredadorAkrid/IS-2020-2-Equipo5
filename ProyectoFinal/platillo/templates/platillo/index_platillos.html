@@ -1,0 +1,11 @@
+{% load static %}
+<title> DeliverEats | {% block title %}Platillos{% endblock title%}</title>
+{% block css %}
+  {% comment %} <link rel="stylesheet" type="text/css" href={% static 'music/css/index.css'%}>  {% endcomment %}
+{% endblock css %}
+
+  <h1>Platillos</h1>
+  <a href="{% url 'crear_platillo'%}"><button id="btnCrearPlatillo" type="button">Crear Platillo</button></a>
+  <a href="{% url 'seleccionar'%}"><button id="btnEditarPlatillo" type="button">Editar Platillo</button></a>
+  <a href="{% url 'seleccionar'%}"><button id="btnEliminarPlatillo" type="button">Eliminar Platillo</button></a>
+  <a href="{% url 'ver'%}"><button id="btnVerPlatillos" type="button">Ver Platillos</button></a>
