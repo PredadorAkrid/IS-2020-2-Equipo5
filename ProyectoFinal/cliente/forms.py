@@ -51,11 +51,9 @@ class SignUpForm(UserCreationForm):
 class InicioSesionForm(AuthenticationForm):
     """Login form."""
     def clean(self):
-        """Validate data.
-        Validating all fields.
-        """
-        usuario = self.data["usuario"]
-        clave = self.data["clave"]
+
+        usuario = self.data["username"]
+        clave = self.data["password"]
         #Si el correo pertenece a un repartidor levantamos un error
         #Ésto es temporal puesto que iniciarán sesión de la misma forma
         #if ( (Repartidor.objects.filter(username=usuario).count() != 0)):
@@ -65,7 +63,7 @@ class InicioSesionForm(AuthenticationForm):
         #Si el correo no existe en la tabla usuarios mandamos un error de registro
         if (User.objects.filter(username=usuario).count() == 0 ):
             self.add_error(
-                "usuario", forms.ValidationError("Éste correo no existe")
+                "username", forms.ValidationError("Éste correo no existe")
             )
 
 
@@ -73,4 +71,4 @@ class InicioSesionForm(AuthenticationForm):
         # authenticate do not log any user.
         user = authenticate(username=usuario, password=clave)
         if user is None:
-            self.add_error("clave", forms.ValidationError("Contraseña inválida"))
+            self.add_error("password", forms.ValidationError("Contraseña inválida"))

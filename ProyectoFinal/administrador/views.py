@@ -16,7 +16,8 @@ from django.urls import reverse
 
 from .models import *
 from .forms import *
-##Class-based-views
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import user_passes_test
 
 class Index(View):
     def get(self, request):
@@ -24,13 +25,17 @@ class Index(View):
     def post(self, request):
         return HttpResponseForbidden()
 
+#Función para listar las órdenes registradas
+
+@staff_member_required
 def lista_ordenes(request):
 	ordenes = Orden.objects.all().order_by('id_orden')
 	contexto = {'ordenes': ordenes}
 	return render(request, 'administrador/lista_ordenes.html',contexto)
 
 
-
+#Función para editar una orden en particular
+@staff_member_required
 def editar_orden(request,  pk):
 	orden_a_editar = Orden.objects.get(id_orden= pk)
 	if request.method == 'GET':
@@ -42,6 +47,8 @@ def editar_orden(request,  pk):
 		return redirect('administrador:lista_ordenes')
 	return render(request, 'administrador/ordenes.html', {'form':form})
 
+#Función para eliminar una orden
+@user_passes_test(lambda u: u.is_superuser)
 def eliminar_orden(request,  pk):
 	orden_a_editar = Orden.objects.get(id_orden= pk)
 	if request.method == 'POST':
