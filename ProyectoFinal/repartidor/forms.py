@@ -42,7 +42,13 @@ class FormularioRegistroRepartidor(UserCreationForm):
         data = {'user' : user, 'cont' : password}
         return data
 
+    def clean_email(self):
+        """Valida que el correo no exista en la base de datos"""
+        data = self.cleaned_data.get('email')
+        if User.objects.filter(email=data).count() > 0:
+            raise forms.ValidationError("Este correo ya existe para un repartidor")
 
+        return data
 
 
 
