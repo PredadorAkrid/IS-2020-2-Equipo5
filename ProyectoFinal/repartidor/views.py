@@ -9,7 +9,7 @@ from django.contrib.auth.models import *
 from django.http import HttpResponse
 from django.views import View
 from .forms import *
-from administrador.models import Orden
+from administrador.models import Orden, EstadoOrden
 
 class IndexRepartidor(View):
     """Pagina Index para los repartidores"""
@@ -66,9 +66,31 @@ class RegistroRepartidor(View):
 
         return HttpResponse("<h1>Repartidor registrado</h1>")
 
-
+# Función que despliega la lista de ordenes listas para recolección
 @staff_member_required
 def ordenes_para_recoleccion(request):
     ordenes_recoleccion = Orden.objects.filter(id_estado_orden=3).order_by('id_orden')
     contexto = {'ordenes' : ordenes_recoleccion}
     return render(request, "repartidor/ordenes_para_recoleccion.html", contexto)
+
+#Funcion que despliega las ordenes asignadas a un repartidor
+@staff_member_required
+def ordenes_asignadas(request):
+    repartidor = Repartidor.objects.get(user=request.user)
+    ordenes_asignadas = Orden.objects.filter(id_repartidor_orden=repartidor).order_by('id_orden')
+    contexto = {'ordenes' : ordenes_asignadas}
+    return render(request, "repartidor/ordenes_asignadas.html", contexto)
+
+#Función que permite a un repartidor seleccionar una orden y comenzar su entrega.
+#Cambia el estado de la orden a "4: Pedido recolectado"
+#Asigna al repartidor a la orden
+@staff_member_required
+def comenzar_entrega(request, pk):
+    orden_por_entregar = Orden.objects.get(id_orden=pk)
+    repartidor = Repartidor.objects.get(user=request.user)
+    estado = EstadoOrden.objects.get(id_estado=4)
+
+    orden_por_entregar.id_estado_orden = estado
+    orden_por_entregar.id_repartidor_orden = repartidor
+    orden_por_entregar.save()
+    return redirect('repartidor:ordenes_asignadas')

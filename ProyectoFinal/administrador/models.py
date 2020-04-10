@@ -4,7 +4,7 @@ from cliente import models
 from repartidor  import models
 from platillo import  models
 from repartidor.models import *
-from cliente.models import * 
+from cliente.models import *
 # Create your models here.
 
 class Orden(models.Model):

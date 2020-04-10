@@ -6,7 +6,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Órdenes listas para recolección</title>
+	<title>Órdenes asignadas</title>
 
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
@@ -44,9 +44,6 @@
 			</td>
 			<td>{{orden.id_estado_orden}}</td>
 			<td>{{orden.direccion_entrega_orden}}</td>
-			<td>
-				<a class="btn btn-primary" href="{% url 'repartidor:comenzar_entrega' orden.id_orden %}">Comenzar entrega</a>
-			</td>
 		</tr>
 		{% endfor %}
 		{% else %}
