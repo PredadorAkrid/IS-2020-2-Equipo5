@@ -1,5 +1,6 @@
 """Vistas Repartidor"""
 #Django
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login, logout
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
@@ -8,9 +9,10 @@ from django.contrib.auth.models import *
 from django.http import HttpResponse
 from django.views import View
 from .forms import *
+from administrador.models import Orden
 
 class IndexRepartidor(View):
-    """Pagina Index para los platillos"""
+    """Pagina Index para los repartidores"""
 
     template = "repartidor/index.html"
 
@@ -63,3 +65,10 @@ class RegistroRepartidor(View):
         email.send()
 
         return HttpResponse("<h1>Repartidor registrado</h1>")
+
+
+@staff_member_required
+def ordenes_para_recoleccion(request):
+    ordenes_recoleccion = Orden.objects.filter(id_estado_orden=3).order_by('id_orden')
+    contexto = {'ordenes' : ordenes_recoleccion}
+    return render(request, "repartidor/ordenes_para_recoleccion.html", contexto)
