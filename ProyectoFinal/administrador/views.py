@@ -11,6 +11,7 @@ from .models import *
 from .forms import *
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import user_passes_test
+from django.core.exceptions import PermissionDenied
 
 
 #Vista basada en funciones para el index de administador
@@ -54,8 +55,18 @@ def editar_orden(request,  pk):
 	#Cargamos el html del formulario
 	return render(request, 'administrador/ordenes.html', {'form':form})
 
+
+def superuser_only(function):
+    def _inner(request, *args, **kwargs):
+        if not request.user.is_superuser:
+            raise PermissionDenied           
+        return function(request, *args, **kwargs)
+    return _inner
+
+
 #Función para eliminar una orden
-@user_passes_test(lambda u: u.is_superuser)
+#@user_passes_test(lambda u: u.is_superuser)
+@superuser_only
 def eliminar_orden(request,  pk):
 	#Obtenemos la instancia con el id recibido
 	orden_a_editar = Orden.objects.get(id_orden= pk)
@@ -66,3 +77,5 @@ def eliminar_orden(request,  pk):
 		return redirect('administrador:listar_ordenes')
 	#Cargamos el html para la confirmación de eliminar la orden
 	return render(request, 'administrador/eliminar_orden.html', {'orden':orden_a_editar})
+
+
