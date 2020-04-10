@@ -27,7 +27,7 @@ class RegistroCliente(View):
             return render(request, 'cliente/registro_cliente.html', context)
         print("es valido")
         user = form.save(commit=False)
-        user.is_active = False
+        user.is_active = True
         user.save()
 
         user2 = Cliente(
@@ -57,12 +57,14 @@ class InicioSesion(View):
 
         """Receive and validate sign up form."""
         form = InicioSesionForm(data=request.POST)
+        
         if not form.is_valid():
             context = {"form": form}
-            return render(request, self.template, context)
+            return render(request, "cliente/login.html", context)
+        
         user = authenticate(
-            username=form.cleaned_data["usuario"],
-            password=form.cleaned_data["clave"],
+            username=form.cleaned_data["username"],
+            password=form.cleaned_data["password"],
         )
         # As simple as telling django the user to login.
         login(request, user)

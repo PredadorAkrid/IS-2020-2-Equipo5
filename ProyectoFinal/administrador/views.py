@@ -9,6 +9,8 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from .models import *
 from .forms import *
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import user_passes_test
 
 
 #Vista basada en funciones para el index de administador
@@ -20,6 +22,8 @@ class Index(View):
 #Vistas basadas en funciones 
 
 #Función para listar las órdenes registradas
+
+@staff_member_required
 def lista_ordenes(request):
 	#Obtenemos todas las ordenes ordendas por id
 	ordenes = Orden.objects.all().order_by('id_orden')
@@ -30,6 +34,7 @@ def lista_ordenes(request):
 
 
 #Función para editar una orden en particular
+@staff_member_required
 def editar_orden(request,  pk):
 	#Obtenemos la instancia (o registro) con el id de la orden que queremos editar
 	orden_a_editar = Orden.objects.get(id_orden= pk)
@@ -50,6 +55,7 @@ def editar_orden(request,  pk):
 	return render(request, 'administrador/ordenes.html', {'form':form})
 
 #Función para eliminar una orden
+@user_passes_test(lambda u: u.is_superuser)
 def eliminar_orden(request,  pk):
 	#Obtenemos la instancia con el id recibido
 	orden_a_editar = Orden.objects.get(id_orden= pk)
