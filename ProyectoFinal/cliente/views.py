@@ -17,13 +17,10 @@ class RegistroCliente(View):
     def get(self, request):
         """Render sign up form."""
         form = ClienteRegistroForm()
-        print(form)
         context = {"form": form}
         return render(request, 'cliente/registro_cliente.html', context)  
     def post(self, request):
         form = ClienteRegistroForm(request.POST)
-        print(form)
-
         if not form.is_valid():
             context = {"form": form}
             return render(request, 'cliente/registro_cliente.html', context)
@@ -62,7 +59,8 @@ class Index(View):
         # As simple as telling django the user to login.
         login(request, user)
 
-        return HttpResponse("<h1>User logged!</h1>")
+        return HttpResponse("<h1>Usuario logeado!</h1>")
+
 '''
 class InicioSesion(View):
     """Cliente Inicio Sesión."""

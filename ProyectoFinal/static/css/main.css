@@ -57,7 +57,7 @@ a:focus {
 }
 
 a:hover {
-	text-decoration: none;
+	text-decoration: overline;
 }
 
 /*---------------------------------------------*/
@@ -191,15 +191,15 @@ iframe {
 
 .wrap-login100 {
   width: 390px;
-  background: #fff;
+  background: rgba(221, 237, 230,0.7);
   border-radius: 10px;
   overflow: hidden;
 
-  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-  -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-  -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 20px 0px rgba(220, 247, 244, 0.1);
+  -moz-box-shadow: 0 3px 20px 0px rgba(220, 247, 244, 0.1);
+  -webkit-box-shadow: 0 3px 20px 0px rgba(220, 247, 244, 0.1);
+  -o-box-shadow: 0 3px 20px 0px rgba(220, 247, 244, 0.1);
+  -ms-box-shadow: 0 3px 20px 0px rgba(220, 247, 244, 0.1);
 }
 
 
