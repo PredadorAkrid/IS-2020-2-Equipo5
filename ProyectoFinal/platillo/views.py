@@ -77,13 +77,14 @@ class EditarPlatillo(View):
     def get(self, request):
         platillo_original = Platillo.objects.get(pk=request.session.get('id'))
         formulario = FormularioEditarPlatillo(instance=platillo_original)
-        contexto = {"formulario": formulario}
+        contexto = {"formulario": formulario,
+                    "platillo_original": platillo_original}
         return render(request, self.template, contexto)
 
     def post(self, request):
         platillo_original = Platillo.objects.get(pk=request.session.get('id'))
         formulario = FormularioEditarPlatillo(
-            request.POST, instance=platillo_original)
+            request.POST, instance=platillo_original, files=request.FILES)
         if formulario.is_valid():
             nombre = formulario.cleaned_data["nombre"]
             descripcion = formulario.cleaned_data["descripcion"]
@@ -92,7 +93,7 @@ class EditarPlatillo(View):
             platillo_original.nombre = nombre
             platillo_original.descripcion = descripcion
             platillo_original.precio = precio
-            platillo_original.imagen = imagen  # No esta funcionando ---------------
+            platillo_original.imagen = imagen
             formulario.save()
             return redirect('platillos')
         return HttpResponse("Error al editar platillo, intentelo nuevamente")

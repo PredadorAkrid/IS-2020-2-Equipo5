@@ -1,9 +1,15 @@
 <h1> Modifica tu platillo </h1>
 
+<h3> Datos actuales del platillo "{{platillo_original.nombre}}" <h3>
+
+{{platillo_original.id}}
+{{platillo_original.nombre}}
+{{platillo_original.descripcion}}
+{{platillo_original.precio}}
+<img src="{{platillo_original.imagen.url}}">
+
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ formulario.errors }}
-    {{ formulario.label_tag }}
     {{ formulario }}
     <input value="Editar" type="submit">
 </form>
