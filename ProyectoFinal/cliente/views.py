@@ -49,6 +49,7 @@ class Index(View):
         """Receive and validate sign up form."""
         form = InicioSesionForm(data=request.POST)
         if not form.is_valid():
+            print("no es válido")
             context = {"form": form}
             return render(request, "cliente/index.html", context)
         

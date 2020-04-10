@@ -94,14 +94,8 @@ class InicioSesionForm(AuthenticationForm):
 
         usuario = self.data["username"]
         clave = self.data["password"]
-        #Si el correo pertenece a un repartidor levantamos un error
-        #Ésto es temporal puesto que iniciarán sesión de la misma forma
-        #if ( (Repartidor.objects.filter(username=usuario).count() != 0)):
-        #    self.add_error(
-        #        "usuario", forms.ValidationError("No es un cliente")
-        #    )
         #Si el correo no existe en la tabla usuarios mandamos un error de registro
-        if (User.objects.filter(username=usuario).count() == 0 ):
+        if (User.objects.filter(username=usuario).count() == 0):
             self.add_error(
                 "username", forms.ValidationError("Éste correo no existe")
             )
@@ -109,3 +103,16 @@ class InicioSesionForm(AuthenticationForm):
         user = authenticate(username=usuario, password=clave)
         if user is None:
             self.add_error("password", forms.ValidationError("Contraseña inválida"))
+    def __init__(self, *args, **kwargs):
+        super(InicioSesionForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget = TextInput(attrs={
+            'id': 'id_username',
+            'class': 'input100',
+            'name': 'username',
+            'placeholder': 'Nombre'})  
+        self.fields['password'].widget = TextInput(attrs={
+            'id': 'id_password',
+            'class': 'input100',
+            'type': "password",
+            'name': 'password',
+            'placeholder': 'Contraseña'}) 
