@@ -73,4 +73,4 @@ class InicioSesion(View):
 class CerrarSesion(View):
     def get(self, request):
         logout(request)
-        return redirect("cliente:Index")
+        return redirect("cliente:IndexCliente")

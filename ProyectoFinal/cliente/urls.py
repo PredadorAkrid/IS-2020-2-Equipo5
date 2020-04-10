@@ -7,6 +7,7 @@ app_name = "cliente"
 #Url's para cliente
 urlpatterns = [
 	#Vistas basadas en clases 
+	path("", views.Index.as_view(), name="IndexCliente"),
 	#Registro de cliente
    	path("registro-cliente/", views.RegistroCliente.as_view(), name="registro_cliente"),
    	#Inicio de sesión de clientes y repartidores

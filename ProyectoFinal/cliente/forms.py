@@ -37,6 +37,12 @@ class ClienteRegistroForm(UserCreationForm):
         if commit:
             pass
         return user
+    def clean_email(self):
+        """Valida que el correo no exista en la base de datos"""
+        data = self.cleaned_data.get('email')
+        if User.objects.filter(email=data).count() > 0:
+            raise forms.ValidationError("Este correo ya está registrado")
+        return data
 #Form para validar inicios de sesión
 #Heredamos del form de autenticación de django AuthenticationForm no es 
 #necesario cargar los campos usaurio contraseña.
@@ -49,12 +55,12 @@ class InicioSesionForm(AuthenticationForm):
         clave = self.data["clave"]
         #Si el correo pertenece a un repartidor levantamos un error
         #Ésto es temporal puesto que iniciarán sesión de la misma forma
-        if ( (Repartidor.objects.filter(username=usuario).count() != 0)):
-            self.add_error(
-                "usuario", forms.ValidationError("No es un cliente")
-            )
+        #if ( (Repartidor.objects.filter(username=usuario).count() != 0)):
+        #    self.add_error(
+        #        "usuario", forms.ValidationError("No es un cliente")
+        #    )
         #Si el correo no existe en la tabla usuarios mandamos un error de registro
-        elif ( (User.objects.filter(username=usuario).count() == 0)):
+        if (User.objects.filter(username=usuario).count() == 0 ):
             self.add_error(
                 "usuario", forms.ValidationError("Éste correo no existe")
             )
