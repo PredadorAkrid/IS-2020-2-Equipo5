@@ -69,12 +69,8 @@ class InicioSesion(View):
 
         return HttpResponse("<h1>User logged!</h1>")
 
-'''
-class LogoutView(View):
-    """Logout View."""
 
+class CerrarSesion(View):
     def get(self, request):
-        """Logout logged user."""
-        # As simple as.
         logout(request)
         return redirect("cliente:IndexCliente")
