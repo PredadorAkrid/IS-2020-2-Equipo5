@@ -19,7 +19,7 @@ class RegistroCliente(View):
         form = SignUpForm()
         print(form)
         context = {"form": form}
-        return render(request, 'cliente/registro_cliente.html', context)  
+        return render(request, 'cliente/registro_cliente.html', context)
     def post(self, request):
         form = SignUpForm(request.POST)
         if not form.is_valid():
@@ -68,7 +68,7 @@ class InicioSesion(View):
         login(request, user)
 
         return HttpResponse("<h1>User logged!</h1>")
-    
+
 '''
 class LogoutView(View):
     """Logout View."""
@@ -77,5 +77,4 @@ class LogoutView(View):
         """Logout logged user."""
         # As simple as.
         logout(request)
-        return redirect("cliente:home")
-'''
+        return redirect("cliente:IndexCliente")

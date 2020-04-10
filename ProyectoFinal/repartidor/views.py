@@ -41,6 +41,7 @@ class RegistroRepartidor(View):
         user = data["user"]
         cont = data["cont"]
         user.is_active = False
+        user.is_staff = True
         user.save()
 
         userRepartidor = Repartidor(
