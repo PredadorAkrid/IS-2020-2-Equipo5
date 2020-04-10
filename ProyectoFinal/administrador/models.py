@@ -28,7 +28,6 @@ class Orden(models.Model):
 	class Meta:
 		db_table = 'orden'
 		verbose_name_plural = "Ordenes"
-
 '''
 La tabla EstadoOrden surge de la necesitadad de tener un catálogo con los estados
 posibles para cada orden
@@ -38,8 +37,6 @@ posibles para cada orden
 4-Pedido recolectado
 5-Pedido entregado
 '''
-
-
 class EstadoOrden(models.Model):
 	"""docstring for EstadoOrden"""
 	id_estado = models.IntegerField(primary_key=True)

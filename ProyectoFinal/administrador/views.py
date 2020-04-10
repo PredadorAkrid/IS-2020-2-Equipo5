@@ -12,7 +12,13 @@ from .forms import *
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
-
+from django.contrib.auth.decorators import login_required
+def superuser_only(function):
+    def _inner(request, *args, **kwargs):
+        if not request.user.is_superuser:
+            raise PermissionDenied           
+        return function(request, *args, **kwargs)
+    return _inner
 
 #Vista basada en funciones para el index de administador
 class Index(View):
@@ -23,8 +29,9 @@ class Index(View):
 #Vistas basadas en funciones 
 
 #Función para listar las órdenes registradas
-
-@staff_member_required
+#@staff_member_required
+@login_required
+@superuser_only
 def lista_ordenes(request):
 	#Obtenemos todas las ordenes ordendas por id
 	ordenes = Orden.objects.all().order_by('id_orden')
@@ -35,7 +42,9 @@ def lista_ordenes(request):
 
 
 #Función para editar una orden en particular
-@staff_member_required
+#@staff_member_required
+@login_required
+@superuser_only
 def editar_orden(request,  pk):
 	#Obtenemos la instancia (o registro) con el id de la orden que queremos editar
 	orden_a_editar = Orden.objects.get(id_orden= pk)
@@ -56,16 +65,12 @@ def editar_orden(request,  pk):
 	return render(request, 'administrador/ordenes.html', {'form':form})
 
 
-def superuser_only(function):
-    def _inner(request, *args, **kwargs):
-        if not request.user.is_superuser:
-            raise PermissionDenied           
-        return function(request, *args, **kwargs)
-    return _inner
+
 
 
 #Función para eliminar una orden
 #@user_passes_test(lambda u: u.is_superuser)
+@login_required
 @superuser_only
 def eliminar_orden(request,  pk):
 	#Obtenemos la instancia con el id recibido

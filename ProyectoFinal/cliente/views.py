@@ -22,6 +22,8 @@ class RegistroCliente(View):
         return render(request, 'cliente/registro_cliente.html', context)  
     def post(self, request):
         form = ClienteRegistroForm(request.POST)
+        print(form)
+
         if not form.is_valid():
             context = {"form": form}
             return render(request, 'cliente/registro_cliente.html', context)
@@ -42,25 +44,40 @@ class RegistroCliente(View):
 
 class Index(View):
     def get(self, request):
-        return render(request, 'cliente/index.html')
+        form = InicioSesionForm()
+        context = {"form": form}
+        return render(request, "cliente/index.html", context)
     def post(self, request):
-        return HttpResponseForbidden()
 
+        """Receive and validate sign up form."""
+        form = InicioSesionForm(data=request.POST)
+        if not form.is_valid():
+            context = {"form": form}
+            return render(request, "cliente/index.html", context)
+        
+        user = authenticate(
+            username=form.cleaned_data["username"],
+            password=form.cleaned_data["password"],
+        )
+        # As simple as telling django the user to login.
+        login(request, user)
+
+        return HttpResponse("<h1>User logged!</h1>")
+'''
 class InicioSesion(View):
     """Cliente Inicio Sesión."""
     def get(self, request):
         """Render sign up form."""
         form = InicioSesionForm()
         context = {"form": form}
-        return render(request, "cliente/login.html", context)
+        return render(request, "cliente/index.html", context)
     def post(self, request):
 
         """Receive and validate sign up form."""
         form = InicioSesionForm(data=request.POST)
-        
         if not form.is_valid():
             context = {"form": form}
-            return render(request, "cliente/login.html", context)
+            return render(request, "cliente/index.html", context)
         
         user = authenticate(
             username=form.cleaned_data["username"],
@@ -71,7 +88,7 @@ class InicioSesion(View):
 
         return HttpResponse("<h1>User logged!</h1>")
     
-
+'''
 class CerrarSesion(View):
     def get(self, request):
         logout(request)

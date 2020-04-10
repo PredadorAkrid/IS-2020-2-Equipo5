@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import * 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.forms.widgets import *
 
 #Formulario para registro de clientes en la aplicación
 class ClienteRegistroForm(UserCreationForm):
@@ -43,6 +43,47 @@ class ClienteRegistroForm(UserCreationForm):
         if User.objects.filter(email=data).count() > 0:
             raise forms.ValidationError("Este correo ya está registrado")
         return data
+    def __init__(self, *args, **kwargs):
+        super(ClienteRegistroForm, self).__init__(*args, **kwargs)
+        self.fields['nombre'].widget = TextInput(attrs={
+            'id': 'id_nombre',
+            'class': 'input100',
+            'name': 'nombre',
+            'placeholder': 'Nombre'})
+        self.fields['paterno'].widget = TextInput(attrs={
+            'id': 'id_paterno',
+            'class': 'input100',
+            'name': 'paterno',
+            'placeholder': 'Paterno'})
+        self.fields['materno'].widget = TextInput(attrs={
+            'id': 'id_materno',
+            'class': 'input100',
+            'name': 'materno',
+            'placeholder': 'Materno'})
+        self.fields['telefono'].widget = TextInput(attrs={
+            'id': 'id_telefono',
+            'class': 'input100',
+            'name': 'telefono',
+            'placeholder': 'Telefono'})
+        self.fields['email'].widget = TextInput(attrs={
+            'id': 'id_email',
+            'class': 'input100',
+            'name': 'email',
+            'placeholder': 'Correo'})
+        self.fields['password1'].widget = TextInput(attrs={
+            'id': 'id_password1',
+            'type': "password",
+            'class': 'input100',
+            'name': 'password1',
+            'placeholder': 'Contraseña'})
+        self.fields['password2'].widget = TextInput(attrs={
+            'id': 'id_password2',
+            'type': "password",
+            'class': 'input100',
+            'name': 'password2',
+            'placeholder': 'Confirmar contraseña'})
+        
+
 #Form para validar inicios de sesión
 #Heredamos del form de autenticación de django AuthenticationForm no es 
 #necesario cargar los campos usaurio contraseña.

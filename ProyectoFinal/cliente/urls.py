@@ -11,7 +11,7 @@ urlpatterns = [
 	#Registro de cliente
    	path("registro-cliente/", views.RegistroCliente.as_view(), name="registro_cliente"),
    	#Inicio de sesión de clientes y repartidores
-   	path("iniciar-sesion/", views.InicioSesion.as_view(), name="inicio_sesion"),
+   	#path("iniciar-sesion/", views.InicioSesion.as_view(), name="inicio_sesion"),
    	#Cerrar sesión para clientes y repartidores
    	path("cerrar-sesion/", views.CerrarSesion.as_view(), name="cerrar_sesion"),
 
