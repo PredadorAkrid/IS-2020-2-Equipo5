@@ -1,16 +1,11 @@
-from django.urls import path
 from django.conf.urls import url,include
+from django.urls import path
+from . import views
 from .views import *
-from repartidor import views
-
 
 app_name = "repartidor"
 
 urlpatterns = [
-    
-	
-    path("repartidor", views.IndexRepartidor.as_view(), name="IndexRepartidor"),
-    
-
-
+    path("repartidor/", views.IndexRepartidor.as_view(), name="IndexRepartidor"),
+    path("registro-repartidor/", views.RegistroRepartidor.as_view(), name="registro-repartidor"),
 ]

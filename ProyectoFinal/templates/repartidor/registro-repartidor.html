@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Registrar repartidor</title>
+	</head>
+	<body>
+		<h1>Registrar un nuevo repartidor</h1>
+
+		<form class="formulario-repartidor" action="." method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+
+			{% for field in form %}
+			<div class="formulario-repartidor-informacion">
+
+                {% if not field.is_hidden%}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                {% endif %}
+
+			</div>
+			{% endfor %}
+			<input value="Registrar" type="submit" id="guardar-repartidor-btn">
+		</form>
+	</body>
+</html>
