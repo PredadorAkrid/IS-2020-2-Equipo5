@@ -7,12 +7,9 @@ from .views import *
 # Views
 app_name = "usuarios"
 
-from users import views
+from usuarios import views
 
 urlpatterns = [
-    path("sign-up/", views.SignUp.as_view(), name="sign_up"),
-    path("login/", views.Login.as_view(), name="login"),
-    path("logout/", views.Logout.as_view(), name="logout"),
-
+    path('usuarios', views.Index.as_view(), name='usuarios'),
 
 ]

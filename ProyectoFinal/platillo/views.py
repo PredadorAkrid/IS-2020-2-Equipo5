@@ -15,7 +15,6 @@ from .forms import FormularioCrearPlatillo, FormularioSeleccionPlatillo, Formula
 
 class Index(View):
     """Pagina Index para los platillos"""
-
     template = "platillo/index_platillos.html"
 
     def get(self, request):

@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Lista de categorias</title>
+	
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+
+{% if categorias %}
+{% for categoria in categorias %}
+	{{categoria}}
+{% endfor %}
+{% else %}
+	<h1>No existen categorias generadas</h1>
+{% endif %}
+	
+	</tbody>
+</table> 
+
+</body>
+</html>
