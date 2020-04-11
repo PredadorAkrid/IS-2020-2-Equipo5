@@ -25,8 +25,9 @@ def superuser_only(function):
 @superuser_only
 def index(request):
     if request.method == "GET": 
-        return render(request, 'index.html')
+        return render(request, 'administrador/index.html')
     elif request.method == "POST":
+        #meter peticiones post
         return HttpResponseForbidden()
 #Vistas basadas en funciones 
 
