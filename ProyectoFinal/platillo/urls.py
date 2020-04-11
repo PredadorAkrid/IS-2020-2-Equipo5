@@ -29,8 +29,5 @@ urlpatterns = [
     path('eliminar', superuser_only(
         views.EliminarPlatillo.as_view()), name="eliminar"),
     path('ver', superuser_only(views.VerPlatillos.as_view()), name="ver"),
-<<<<<<< HEAD
 ]
-=======
-]
->>>>>>> origin/Lechuga
+

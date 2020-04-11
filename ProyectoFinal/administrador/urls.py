@@ -15,5 +15,4 @@ urlpatterns = [
     path("editar-ordenes/(?P<pk>d+)/", editar_orden, name="editar_orden"),
     # ruta para eliminar una orden, recibe el id de la orden a eliminar en la url
     path("eliminar-ordenes/(?P<pk>d+)/", eliminar_orden, name="eliminar_orden"),
-
 ]
