@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Este es el template para categorias</h1>
-  </body>
-</html>
+{% load static %}
+<title> Deliver&Eats | Categorías</title>
+<link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<body>
+  <h1>Categorías</h1>
+  <div id="container">
+    <div><a href="./crear-categoria/"><button id="btnCrearCategoria" type="button">Crear categoría</button></a></div>
+    <div><a href="./ver-categorias/"><button id="btnVerCategoria" type="button">Ver Categorías</button></a></div>
+  </div>
+</body>
