@@ -27,7 +27,7 @@ def superuser_only(function):
         return function(request, *args, **kwargs)
     return _inner
 
-#Vista basada en funciones para el index de administador
+#Vista basada en funciones para el index de administrador
 @login_required
 @superuser_only
 def index(request):

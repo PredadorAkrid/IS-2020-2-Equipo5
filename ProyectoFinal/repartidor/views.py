@@ -2,6 +2,7 @@
 #Django
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login, logout
+from administrador.models import Orden, EstadoOrden
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
@@ -9,7 +10,8 @@ from django.contrib.auth.models import *
 from django.http import HttpResponse
 from django.views import View
 from .forms import *
-from administrador.models import Orden, EstadoOrden
+from administrador.views import superuser_only
+
 
 class IndexRepartidor(View):
     """Pagina Index para los repartidores"""
@@ -20,6 +22,7 @@ class IndexRepartidor(View):
         print("llega a repartidores")
         """Metodo Get"""
         return render(request, self.template)
+
 
 class RegistroRepartidor(View):
     """Registro nuevo repartidor"""
