@@ -7,9 +7,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms.widgets import *
 
-class SignUpForm(UserCreationForm):
-    """Sign up new user form."""
+#Formulario para registro de clientes en la aplicación
+class ClienteRegistroForm(UserCreationForm):
+
     nombre = forms.CharField(max_length=64)
     paterno = forms.CharField(max_length=100)
     materno = forms.CharField(max_length=100)
@@ -44,6 +46,47 @@ class SignUpForm(UserCreationForm):
         if User.objects.filter(email=data).count() > 0:
             raise forms.ValidationError("Este correo ya está registrado")
         return data
+    def __init__(self, *args, **kwargs):
+        super(ClienteRegistroForm, self).__init__(*args, **kwargs)
+        self.fields['nombre'].widget = TextInput(attrs={
+            'id': 'id_nombre',
+            'class': 'input100',
+            'name': 'nombre',
+            'placeholder': 'Nombre'})
+        self.fields['paterno'].widget = TextInput(attrs={
+            'id': 'id_paterno',
+            'class': 'input100',
+            'name': 'paterno',
+            'placeholder': 'Paterno'})
+        self.fields['materno'].widget = TextInput(attrs={
+            'id': 'id_materno',
+            'class': 'input100',
+            'name': 'materno',
+            'placeholder': 'Materno'})
+        self.fields['telefono'].widget = TextInput(attrs={
+            'id': 'id_telefono',
+            'class': 'input100',
+            'name': 'telefono',
+            'placeholder': 'Telefono'})
+        self.fields['email'].widget = TextInput(attrs={
+            'id': 'id_email',
+            'class': 'input100',
+            'name': 'email',
+            'placeholder': 'Correo'})
+        self.fields['password1'].widget = TextInput(attrs={
+            'id': 'id_password1',
+            'type': "password",
+            'class': 'input100',
+            'name': 'password1',
+            'placeholder': 'Contraseña'})
+        self.fields['password2'].widget = TextInput(attrs={
+            'id': 'id_password2',
+            'type': "password",
+            'class': 'input100',
+            'name': 'password2',
+            'placeholder': 'Confirmar contraseña'})
+
+
 #Form para validar inicios de sesión
 #Heredamos del form de autenticación de django AuthenticationForm no es
 #necesario cargar los campos usaurio contraseña.
@@ -54,14 +97,8 @@ class InicioSesionForm(AuthenticationForm):
 
         usuario = self.data["username"]
         clave = self.data["password"]
-        #Si el correo pertenece a un repartidor levantamos un error
-        #Ésto es temporal puesto que iniciarán sesión de la misma forma
-        #if ( (Repartidor.objects.filter(username=usuario).count() != 0)):
-        #    self.add_error(
-        #        "usuario", forms.ValidationError("No es un cliente")
-        #    )
         #Si el correo no existe en la tabla usuarios mandamos un error de registro
-        if (User.objects.filter(username=usuario).count() == 0 ):
+        if (User.objects.filter(username=usuario).count() == 0):
             self.add_error(
                 "username", forms.ValidationError("Éste correo no existe")
             )
@@ -72,3 +109,16 @@ class InicioSesionForm(AuthenticationForm):
         user = authenticate(username=usuario, password=clave)
         if user is None:
             self.add_error("password", forms.ValidationError("Contraseña inválida"))
+    def __init__(self, *args, **kwargs):
+        super(InicioSesionForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget = TextInput(attrs={
+            'id': 'id_username',
+            'class': 'input100',
+            'name': 'username',
+            'placeholder': 'Nombre'})
+        self.fields['password'].widget = TextInput(attrs={
+            'id': 'id_password',
+            'class': 'input100',
+            'type': "password",
+            'name': 'password',
+            'placeholder': 'Contraseña'})

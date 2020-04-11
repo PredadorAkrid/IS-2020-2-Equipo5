@@ -42,7 +42,7 @@ class RegistroRepartidor(View):
         data = form.save(commit=False)
         user = data["user"]
         cont = data["cont"]
-        user.is_active = False
+        user.is_active = True
         user.is_staff = True
         user.save()
 
