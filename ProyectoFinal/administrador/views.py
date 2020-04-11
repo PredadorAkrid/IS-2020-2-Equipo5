@@ -21,10 +21,12 @@ def superuser_only(function):
     return _inner
 
 #Vista basada en funciones para el index de administador
-class Index(View):
-    def get(self, request):
+@login_required
+@superuser_only
+def index(request):
+    if request.method == "GET": 
         return render(request, 'index.html')
-    def post(self, request):
+    elif request.method == "POST":
         return HttpResponseForbidden()
 #Vistas basadas en funciones 
 

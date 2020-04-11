@@ -8,7 +8,7 @@ app_name = "administrador"
 urlpatterns = [
     
 	#temporal, no se llamarán así las vistas
-   	path("", views.Index.as_view(), name="Index"),
+   	path("", index, name="IndexAdministrador"),
    	#ruta para listar las ordenes con vistas basadas en funciones
     path("lista-ordenes/", lista_ordenes, name="listar_ordenes"),
 	#ruta para editar una orden, recibe el id de la orden a editar en la url  
