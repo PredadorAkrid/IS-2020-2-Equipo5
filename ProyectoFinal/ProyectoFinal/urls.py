@@ -28,4 +28,8 @@ urlpatterns = [
     path('platillo/', include('platillo.urls')),
     path('usuarios/', include('usuarios.urls')),
     path('categoria/', include('categoria.urls')),
+<<<<<<< HEAD
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> origin/Lechuga

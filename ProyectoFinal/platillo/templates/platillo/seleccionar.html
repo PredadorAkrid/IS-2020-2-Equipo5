@@ -1,0 +1,18 @@
+{% load static %}
+<title>Deliver&Eats | Crear Platillo</title>
+<link rel="stylesheet" type="text/css" href={% static 'platillo/css/seleccionar.css'%}> 
+<link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+
+<body>
+  <h1>Selecciona un platillo</h1>
+
+  <div id="container">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="seleccion">Selecciona el platillo deseado</label><br>
+        {{formulario.seleccion}}<br>
+        <input id="editar" type="submit" name="editar" value="Editar">
+        <input id="eliminar" type="submit" name="eliminar" value="Eliminar">
+    </form>
+  </div>
+</body>

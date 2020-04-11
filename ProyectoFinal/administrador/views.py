@@ -81,4 +81,8 @@ def eliminar_orden(request,  pk):
         # Redirigimos a la lista de órdenes
         return redirect('administrador:listar_ordenes')
     # Cargamos el html para la confirmación de eliminar la orden
+<<<<<<< HEAD
     return render(request, 'administrador/eliminar_orden.html', {'orden': orden_a_editar})
+=======
+    return render(request, 'administrador/eliminar_orden.html', {'orden': orden_a_editar})
+>>>>>>> origin/Lechuga

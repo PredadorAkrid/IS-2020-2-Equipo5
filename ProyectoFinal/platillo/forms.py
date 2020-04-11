@@ -61,4 +61,8 @@ class FormularioEditarPlatillo(forms.ModelForm):
         nombre = self.clean_data["nombre"]
         if Platillo.objects.filter(nombre=nombre).count() > 0:
             raise forms.ValidationError("El nombre del platillo ya existe!")
+<<<<<<< HEAD
         return nombre
+=======
+        return nombre
+>>>>>>> origin/Lechuga

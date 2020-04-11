@@ -124,4 +124,8 @@ class VerPlatillos(View):
     def get(self, request):
         platillos = Platillo.objects.all()
         contexto = {"platillos": platillos}
+<<<<<<< HEAD
         return render(request, self.template, contexto)
+=======
+        return render(request, self.template, contexto)
+>>>>>>> origin/Lechuga
