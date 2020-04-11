@@ -9,12 +9,15 @@
   <div></div>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        {{ formulario.errors }}
+        {{ formulario.label_tag }}
         <label for="nombre">Nombre</label><br>
         {{ formulario.nombre }}<br>
         <label for="descripcion">Descripción</label><br>
         {{ formulario.descripcion }}<br>
         <label for="precio">Precio</label><br>
         $ {{ formulario.precio }} MXN<br>
+        {{formulario.categoria}}
         {{ formulario.imagen }}<br>
         <input id="btnCrear" value="Crear" type="submit">
     </form>

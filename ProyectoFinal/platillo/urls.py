@@ -1,14 +1,32 @@
 from django.urls import path
 from . import views
+# imports para autenticar el usuario
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.admin.views.decorators import staff_member_required
+
+# funcion para autenticar el usuario
+
+
+def superuser_only(function):
+    def _inner(request, *args, **kwargs):
+        if not request.user.is_superuser:
+            raise PermissionDenied
+        return function(request, *args, **kwargs)
+    return _inner
+
 
 urlpatterns = [
     # Vistas de clase
-    path('platillos', views.Index.as_view(), name='platillos'),
-    path('platillos/crear', views.CrearPlatillo.as_view(), name="crear_platillo"),
-    path('platillos/seleccionar', views.SeleccionarPlatillo.as_view(),
+    path('', superuser_only(views.Index.as_view()), name='platillos'),
+    path('crear',
+         superuser_only(views.CrearPlatillo.as_view()), name="crear_platillo"),
+    path('seleccionar', superuser_only(views.SeleccionarPlatillo.as_view()),
          name="seleccionar"),
-    path('platillos/editar',
-         views.EditarPlatillo.as_view(), name="editar"),
-    path('platillos/eliminar', views.EliminarPlatillo.as_view(), name="eliminar"),
-    path('platillos/ver', views.VerPlatillos.as_view(), name="ver"),
+    path('editar',
+         superuser_only(views.EditarPlatillo.as_view()), name="editar"),
+    path('eliminar', superuser_only(
+        views.EliminarPlatillo.as_view()), name="eliminar"),
+    path('ver', superuser_only(views.VerPlatillos.as_view()), name="ver"),
 ]

@@ -1,7 +1,7 @@
 """ Formularios para platillos """
 
 from django import forms
-from .models import Platillo
+from .models import Platillo, Categoria
 from django.contrib.auth.models import User
 from django.forms.widgets import FileInput
 
@@ -15,11 +15,13 @@ class FormularioCrearPlatillo(forms.ModelForm):
     precio = forms.FloatField(label="precio", required=True, widget=forms.NumberInput(
         attrs={'class': 'campo', 'name': 'precio'}))
     imagen = forms.FileField(label="imagen", required=False)
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(
+    ), empty_label="Selecciona la categoria")
 
     class Meta:
         db_table = "platillo"
         model = Platillo
-        fields = ("nombre", "descripcion", "precio", "imagen")
+        fields = ("nombre", "descripcion", "precio", "imagen", "categoria")
 
     def nombre_existente(self):
         """ Metodo para evitar nombres duplicados """
