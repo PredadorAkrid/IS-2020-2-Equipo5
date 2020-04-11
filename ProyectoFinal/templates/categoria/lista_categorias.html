@@ -8,19 +8,65 @@
 	<title>Lista de categorias</title>
 	
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/categoria/index-categoria.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+
 </head>
 <body>
 
-{% if categorias %}
-{% for categoria in categorias %}
-	{{categoria}}
-{% endfor %}
-{% else %}
-	<h1>No existen categorias generadas</h1>
-{% endif %}
+
+
+<table class="table table-bordered">
+	{% if categorias %}
+
+	<thead>
+
+		<tr>
+			<td>#</td>
+			<td>Nombre de categoría</td>
+		</tr>
+		
+	</thead>
+	<tbody>
+		{% for categoria in categorias %}
+		<tr>
+			<td></td>
+			<td>{{categoria}}</td>
+			
+		</tr>
+		
 	
 	</tbody>
+	{% endfor %}
+		{% else %}
+		<h1 align="center">No existen categorias generadas</h1>
+		<br>
+		<div class="imagen-vacia" align="center">
+				<img class="img-fluid rounded d-block m-l-none" style="width: 100px; height: 200px;" src="{% static 'imagenes/categorias/categorias-vacias.jpg' %}" align="center" />
+		</div>
+
+		{% endif %}
 </table> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

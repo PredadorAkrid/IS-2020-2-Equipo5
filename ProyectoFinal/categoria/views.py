@@ -33,10 +33,12 @@ def crear_categoria(request):
 		#Instanciamos el form de categoria con los datos enviados
 		form = CategoriaForm(request.POST)
 		#Validamos el formulario
-		if form.is_valid():
+		if not form.is_valid():
 			#Guardamos cambios
-			form.save()
-		return redirect('administrador:Index')
+			context = {"form": form}
+			return render(request, "categoria/crear_categoria.html", context)
+		form.save()
+		return redirect('administrador:IndexAdministrador')
 	#Si recibimos petición get
 	elif request.method == 'GET':
 		#Instanciamos el formulario de agregar categoria y se lo asignamos al contexto

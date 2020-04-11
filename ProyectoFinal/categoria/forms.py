@@ -10,4 +10,10 @@ class CategoriaForm(forms.ModelForm):
 		fields = [
 			'nombre_categoria',
 		]
+	def clean_nombre_categoria(self):
+		data = self.cleaned_data.get('nombre_categoria')
+		print("esto es data " + data)
+		if Categoria.objects.filter(nombre_categoria=data).count() > 0:
+			raise forms.ValidationError("Esta categoría ya existe")
+		return data
 	

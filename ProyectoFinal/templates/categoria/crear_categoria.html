@@ -4,20 +4,23 @@
 <html>
 <head>
 	<title>Agregar categoria</title>
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-	<h1>Crear una categoría</h1>
-<form action="./crear-categoria" method="POST" enctype="multipart/form-data">
-	{% csrf_token %}
-    {% for field in form %}
-    <div class="crear_categoria_input">
-        {{ field.label_tag }}
-        {{ field }}
-    	{{ field.errors }}
-        
-    </div>
-    {% endfor %}
-    <input value="Confirmar" type="submit">
-</form>
+	<h1 align="center">Crea una categoría</h1>
+    <br>
+    <form action="../../../categoria/crear-categoria/" method="POST" enctype="multipart/form-data" align="center">
+	   {% csrf_token %}
+        {% for field in form %}
+        <div class="crear_categoria_input">
+            {{ field.label_tag }}
+            {{ field }}
+    	   {{ field.errors }} 
+        </div>
+        {% endfor %}
+        <br>
+        <input value="Confirmar" type="submit">
+    </form>
 </body>
 </html>

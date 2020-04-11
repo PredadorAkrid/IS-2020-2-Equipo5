@@ -5,7 +5,7 @@ from django.db import models
 
 class Categoria(models.Model):
     id_categoria = models.AutoField(primary_key=True)
-    nombre_categoria = models.CharField(null=False, max_length=100)
+    nombre_categoria = models.CharField(unique=True, null=False, max_length=100)
 
     class Meta:
         db_table = 'categoria'
