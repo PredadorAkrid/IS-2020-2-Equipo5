@@ -1,12 +1,26 @@
+{% load static %}
+<title>Deliver&Eats | Eliminar Platillo</title>
+<link rel="stylesheet" type="text/css" href={% static 'platillo/css/eliminar_platillo.css'%}> 
+<link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+
 <h1>¿Estas seguro que deseas eliminar este platillo?</h1>
 
-{{platillo_original.id}}
-{{platillo_original.nombre}}
-{{platillo_original.descripcion}}
-{{platillo_original.precio}}
-<img src="{{platillo_original.imagen.url}}">
-
-<form method="POST">
+<div class="card-container">
+  <div class="card u-clearfix">
+    <div class="card-body">
+      <span class="card-number card-circle subtle">{{platillo_original.id}}</span>
+      <span class="card-author subtle">${{platillo_original.precio}}MXN</span>
+      <h2 class="card-title">{{platillo_original.nombre}}</h2>
+      <span class="card-description subtle">{{platillo_original.descripcion}}</span>
+    </div>
+    <img src="{{platillo_original.imagen.url}}" alt="" class="card-media" height="360" width="auto"/>
+  </div>
+  <form method="POST">
     {% csrf_token %}
-    <input type="submit" value="Si, estoy seguro">
-</form>
+    <input id="btnEliminar" type="submit" value="Si, estoy seguro">
+    <a href="{% url 'platillos'%}"><button id="btnSalir" type="button">NO!</button></a>
+    </form>
+    
+  <div class="card-shadow"></div>
+</div><br>
+

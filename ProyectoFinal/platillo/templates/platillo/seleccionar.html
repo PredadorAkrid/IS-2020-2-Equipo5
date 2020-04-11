@@ -1,15 +1,18 @@
 {% load static %}
-{% comment %} {% block title%}Crear Platillo{% endblock title%} {% endcomment %}
-<title>Crear Platillo</title>
-{% block css %}
-  {% comment %} <link rel="stylesheet" type="text/css" href={% static 'music/css/create_artist.css'%}>  {% endcomment %}
-{% endblock css %}
+<title>Deliver&Eats | Crear Platillo</title>
+<link rel="stylesheet" type="text/css" href={% static 'platillo/css/seleccionar.css'%}> 
+<link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
 
-<h1>Selecciona un platillo</h1>
+<body>
+  <h1>Selecciona un platillo</h1>
 
-<form action="" method="POST">
-    {% csrf_token %}
-    {{formulario}}
-    <input type="submit" name="editar" value="Editar">
-    <input type="submit" name="eliminar" value="Eliminar">
-</form>
+  <div id="container">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="seleccion">Selecciona el platillo deseado</label><br>
+        {{formulario.seleccion}}<br>
+        <input id="editar" type="submit" name="editar" value="Editar">
+        <input id="eliminar" type="submit" name="eliminar" value="Eliminar">
+    </form>
+  </div>
+</body>

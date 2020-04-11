@@ -3,14 +3,18 @@
 from django import forms
 from .models import Platillo
 from django.contrib.auth.models import User
+from django.forms.widgets import FileInput
 
 
 class FormularioCrearPlatillo(forms.ModelForm):
     """Formulario para crear un nuevo platillo"""
-    nombre = forms.CharField()
-    descripcion = forms.CharField()
-    precio = forms.FloatField()
-    imagen = forms.FileField(required=False)
+    nombre = forms.CharField(label="nombre", max_length=250, required=True, widget=forms.TextInput(
+        attrs={'class': 'campo', 'name': 'nombre'}))
+    descripcion = forms.CharField(label="descripcion", max_length=500, required=False, widget=forms.Textarea(
+        attrs={'class': 'campoDescripcion', 'name': 'descripcion'}))
+    precio = forms.FloatField(label="precio", required=True, widget=forms.NumberInput(
+        attrs={'class': 'campo', 'name': 'precio'}))
+    imagen = forms.FileField(label="imagen", required=False)
 
     class Meta:
         db_table = "platillo"
@@ -37,10 +41,13 @@ class FormularioSeleccionPlatillo(forms.ModelForm):
 
 class FormularioEditarPlatillo(forms.ModelForm):
     """Formulario para editar un platillo"""
-    nombre = forms.CharField(required=False)
-    descripcion = forms.CharField(required=False)
-    precio = forms.FloatField(required=False)
-    imagen = forms.FileField(required=False)
+    nombre = forms.CharField(label="nombre", max_length=250, required=True, widget=forms.TextInput(
+        attrs={'class': 'campo', 'name': 'nombre'}))
+    descripcion = forms.CharField(label="descripcion", max_length=500, required=False, widget=forms.Textarea(
+        attrs={'class': 'campoDescripcion', 'name': 'descripcion'}))
+    precio = forms.FloatField(label="precio", required=True, widget=forms.NumberInput(
+        attrs={'class': 'campo', 'name': 'precio'}))
+    imagen = forms.FileField(label="imagen", required=False, widget=FileInput)
 
     class Meta:
         db_table = "platillo"

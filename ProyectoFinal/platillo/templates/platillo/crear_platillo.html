@@ -1,15 +1,23 @@
 {% load static %}
-{% comment %} {% block title%}Crear Platillo{% endblock title%} {% endcomment %}
-<title>Crear Platillo</title>
-{% block css %}
-  {% comment %} <link rel="stylesheet" type="text/css" href={% static 'music/css/create_artist.css'%}>  {% endcomment %}
-{% endblock css %}
+<title>Deliver&Eats | Crear Platillo</title>
+<link rel="stylesheet" type="text/css" href={% static 'platillo/css/crear_platillo.css'%}> 
+<link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
 
-    <h1>Crea un platillo</h1>
+<body>
+  <h1>Crea un platillo</h1>
+  <div id="container">
+  <div></div>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ formulario.errors }}
-        {{ formulario.label_tag }}
-        {{ formulario }}
-        <input value="Crear" type="submit">
+        <label for="nombre">Nombre</label><br>
+        {{ formulario.nombre }}<br>
+        <label for="descripcion">Descripción</label><br>
+        {{ formulario.descripcion }}<br>
+        <label for="precio">Precio</label><br>
+        $ {{ formulario.precio }} MXN<br>
+        {{ formulario.imagen }}<br>
+        <input id="btnCrear" value="Crear" type="submit">
     </form>
+    <div></div>
+  </div>
+</body>
