@@ -1,0 +1,16 @@
+input{
+    border-radius: 20px;
+    height: 35px;
+    width: 235px;
+    margin: 10px;
+    padding-left: 10px;
+}
+
+.input-repartidor{
+    font-family: SourceSansPro-SemiBold;
+    font-size: 1rem;
+}
+
+#guardar-repartidor{
+    
+}

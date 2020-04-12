@@ -20,7 +20,7 @@ class RegistroCliente(View):
         context = {"form": form}
         return render(request, 'cliente/registro_cliente.html', context)
     def post(self, request):
-        form = SignUpForm(request.POST)
+        form = ClienteRegistroForm(request.POST)
         if not form.is_valid():
             context = {"form": form}
             return render(request, 'cliente/registro_cliente.html', context)
@@ -71,7 +71,6 @@ class InicioSesion(View):
         context = {"form": form}
         return render(request, "cliente/index.html", context)
     def post(self, request):
-
         """Receive and validate sign up form."""
         form = InicioSesionForm(data=request.POST)
         if not form.is_valid():
@@ -84,7 +83,6 @@ class InicioSesion(View):
         )
         # As simple as telling django the user to login.
         login(request, user)
-
         return HttpResponse("<h1>User logged!</h1>")
 
 '''

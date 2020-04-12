@@ -7,7 +7,7 @@ from .views import *
 app_name = "repartidor"
 
 urlpatterns = [
-    path("", index_repartidor, name="IndexRepartidor"),
+    path("", index_repartidor, name="index_repartidor"),
     path("registro-repartidor/", superuser_only(views.RegistroRepartidor.as_view()), name="registro-repartidor"),
     path("ordenes-para-recoleccion/", ordenes_para_recoleccion, name="ordenes_para_recoleccion"),
     path("comenzar_entrega/(?P<pk>d+)/", comenzar_entrega, name="comenzar_entrega"),

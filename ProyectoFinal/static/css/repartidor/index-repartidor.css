@@ -13,11 +13,6 @@
   src: url('../../../static/fonts/source-sans-pro/SourceSansPro-SemiBold.ttf');
 }
 
-@font-face {
-  font-family: JosefinSans-Bold;
-  src: url('../../../static/fonts/JosefinSans/JosefinSans-Bold.ttf');
-}
-
 html,body{
     margin:0;
     padding:0;
@@ -46,7 +41,7 @@ body{
 }
 
 .contenedor-menu{
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -68,16 +63,20 @@ body{
     justify-content: center;
     font-family: SourceSansPro-SemiBold;
     opacity: 0.9;
+    font-size: inherit;
+    border: none;
+    text-decoration: none;
 }
 
 .btn:hover{
     background-color: #39ac39;
     box-shadow: 5px 10px 18px #888888;
     opacity: 0.9;
+    cursor: pointer;
 }
 
 #mensaje-bienvenida{
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.5);
     margin-top: 50px;
     margin-bottom: -30px;
 
