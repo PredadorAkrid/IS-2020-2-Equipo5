@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static%}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index_administrador.css'%}"> 
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+    <title>Deliver&Eats | Administrador</title>
   </head>
   <body>
-    <h1>Este es el index para los administrador</h1>
-    <div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action active">
-    Cras justo odio
-  </a>
-  <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-  <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-  <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-  <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
-</div>
+    <h1>Bienvenido Administrador</h1>
+    <div id="seleccion">
+      <div id="container">
+        <div><a href="{% url 'platillos'%}"><button type="button">Menu Platillos</button></a></div>
+        <div><a href="{% url 'platillos'%}"><button  type="button">----</button></a></div>
+        <div><a href="{% url 'platillos'%}"><button type="button">----</button></a></div>
+        <div><a href="{% url 'platillos'%}"><button  type="button">----</button></a></div>
+        <div><a href="{% url 'platillos'%}"><button type="button">----</button></a></div>
+        <div><a href="{% url 'platillos'%}"><button  type="button">----</button></a></div>
+        <div><a href="{% url 'platillos'%}"><button type="button">----</button></a></div>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,0 +1,52 @@
+body {
+  background: url("/static/imagenes/admin.jpg") no-repeat fixed;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  font-family: "Istok Web", sans-serif;
+  text-align: center;
+  color: white;
+  margin: 0px;
+  padding: 0px;
+}
+
+h1 {
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.486);
+  text-shadow: 1px 1px black;
+}
+
+#container {
+  height: 80vh;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+button {
+  align-self: center;
+  align-self: center;
+  color: white;
+  width: 250px;
+  height: auto;
+  background-color: rgba(228, 118, 15);
+  border-color: white;
+  border-radius: 8px;
+  border: 2px solid rgba(228, 118, 15);
+  font-size: 24px;
+  margin: 10px 0px 10px 0px;
+  padding: 10px 10px 10px 10px;
+}
+
+button {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button:hover {
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  background-color: rgba(228, 192, 159, 0.8);
