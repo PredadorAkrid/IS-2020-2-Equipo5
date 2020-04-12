@@ -44,13 +44,10 @@
 			</td>
 			<td>{{orden.id_estado_orden}}</td>
 			<td>{{orden.direccion_entrega_orden}}</td>
-            <td>
-				<a class="btn btn-primary" href="{% url 'repartidor:finalizar_entrega' orden.id_orden %}">Finalizar entrega</a>
-			</td>
 		</tr>
 		{% endfor %}
 		{% else %}
-		<h1>No tienes órdenes asignadas</h1>
+		<h1>No tienes órdenes realizadas</h1>
 
 		{% endif %}
 
