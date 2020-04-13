@@ -17,42 +17,107 @@ def superuser_only(function):
         return function(request, *args, **kwargs)
     return _inner
 
-#Vistas basadas en clases
+# Vistas basadas en clases
+
+
 class Index(View):
     def get(self, request):
         return render(request, 'categoria/index.html')
+
     def post(self, request):
         return HttpResponseForbidden()
-#Vistas basadas en funciones 
+# Vistas basadas en funciones
 @login_required
 @superuser_only
-#Función para cargar una categoría
+# Función para cargar una categoría
 def crear_categoria(request):
-	#Si recibimos petición post
-	if request.method == 'POST':
-		#Instanciamos el form de categoria con los datos enviados
-		form = CategoriaForm(request.POST)
-		#Validamos el formulario
-		if not form.is_valid():
-			#Guardamos cambios
-			context = {"form": form}
-			return render(request, "categoria/crear_categoria.html", context)
-		form.save()
-		return redirect('administrador:IndexAdministrador')
-	#Si recibimos petición get
-	elif request.method == 'GET':
-		#Instanciamos el formulario de agregar categoria y se lo asignamos al contexto
-		form = CategoriaForm()
-		context = {"form": form}
-		#Cargamos el html para crear categoría
-		return render(request, 'categoria/crear_categoria.html', context) 
+    # Si recibimos petición post
+    if request.method == 'POST':
+        # Instanciamos el form de categoria con los datos enviados
+        form = CategoriaForm(request.POST)
+        # Validamos el formulario
+        if not form.is_valid():
+            # Guardamos cambios
+            context = {"form": form}
+            return render(request, "categoria/crear_categoria.html", context)
+        form.save()
+        return redirect('administrador:IndexAdministrador')
+    # Si recibimos petición get
+    elif request.method == 'GET':
+        # Instanciamos el formulario de agregar categoria y se lo asignamos al contexto
+        form = CategoriaForm()
+        context = {"form": form}
+        # Cargamos el html para crear categoría
+        return render(request, 'categoria/crear_categoria.html', context)
+
 
 @login_required
-#Función para listar las categorías existentes
+# Función para listar las categorías existentes
 def lista_categoria(request):
-	#Obtenemos el queryset de las categorías ordenadas alfabéticamente
-	categorias = Categoria.objects.all().order_by('nombre_categoria')
-	#Asignamos al contexto el queryset
-	contexto = {'categorias': categorias}
-	#Cargamos el html con la lista de categorías
-	return render(request, 'categoria/lista_categorias.html',contexto)
+    # Obtenemos el queryset de las categorías ordenadas alfabéticamente
+    categorias = Categoria.objects.all().order_by('nombre_categoria')
+    # Asignamos al contexto el queryset
+    contexto = {'categorias': categorias}
+    # Cargamos el html con la lista de categorías
+    return render(request, 'categoria/lista_categorias.html', contexto)
+
+
+@login_required
+def selecciona_categoria(request):
+    """Seleccionamos la categoria"""
+
+    template = 'categoria/seleccion_categoria.html'
+    template_editar = 'categoria/editar_categoria.html'
+
+    if request.method == 'GET':
+        formulario = FormularioSeleccionCategoria()
+        contexto = {"formulario": formulario}
+        return render(request, template, contexto)
+    elif request.method == 'POST':
+        formulario = FormularioSeleccionCategoria(request.POST)
+        if formulario.is_valid():
+            id_categoria = formulario.cleaned_data["seleccion"].id_categoria
+            request.session['id_categoria'] = id_categoria
+            # Esto te redirecciona segun el boton pulsado
+            if 'editar' in request.POST:
+                return redirect('categoria:editar_categoria')
+            if 'eliminar' in request.POST:
+                return redirect('categoria:eliminar_categoria')
+    return HttpResponse("Error al seleccionar la categoria")
+
+
+@login_required
+def editar_categoria(request):
+    template = "categoria/editar_categoria.html"
+
+    if request.method == 'GET':
+        categoria_original = Categoria.objects.get(
+            pk=request.session.get('id_categoria'))
+        formulario = FromularioEditarCategoria(instance=categoria_original)
+        contexto = {"formulario": formulario,
+                    "categoria_original": categoria_original}
+        return render(request, template, contexto)
+    if request.method == 'POST':
+        categoria_original = Categoria.objects.get(
+            pk=request.session.get('id_categoria'))
+        formulario = FromularioEditarCategoria(
+            request.POST, instance=categoria_original)
+        if formulario.is_valid():
+            nombre = formulario.cleaned_data["nombre_categoria"]
+            categoria_original.nombre_categoria = nombre
+            formulario.save()
+            return redirect('categoria:selecciona_categoria')
+    return HttpResponse("Error al editar categoria")
+
+
+@login_required
+def eliminar_categoria(request):
+    template = "categoria/eliminar_categoria.html"
+    if request.method == 'GET':
+        return render(request, template)
+    if request.method == 'POST':
+        categoria_original = Categoria.objects.get(
+            pk=request.session.get('id_categoria'))
+        categoria_original.delete()
+        return redirect("categoria:selecciona_categoria")
+    return HttpResponse("Error al eliminar categoria")
