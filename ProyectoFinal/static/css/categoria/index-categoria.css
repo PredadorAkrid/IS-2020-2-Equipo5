@@ -1,0 +1,9 @@
+body {
+  background: linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,.35)),url("../../../static/imagenes/index-categoria.jpeg") no-repeat fixed 20%;
+  background-size: 100%;
+  font-family: "Istok Web", sans-serif;
+  color: black;
+  font-size: 30px;
+  margin: 0px;
+  padding: 0px;
+}

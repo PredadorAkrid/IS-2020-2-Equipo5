@@ -1,0 +1,13 @@
+body {
+  background: url("../../../static/imagenes/ordenes.jpg") no-repeat fixed;
+  background-size: 100%;
+  font-family: "Istok Web", sans-serif;
+  text-align: center;
+  color: white;
+  margin: 0px;
+  padding: 0px;
+}
+
+.table-bordered{
+  font-size: 25px;
+}
