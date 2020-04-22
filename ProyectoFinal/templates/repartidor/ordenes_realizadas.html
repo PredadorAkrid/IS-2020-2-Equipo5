@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Órdenes asignadas</title>
+
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<table class="table table-bordered">
+
+    <div class="return-btn" style="text-align: end">
+        <a class="btn btn-primary" href="{% url 'repartidor:index_repartidor' %}">Volver</a>
+    </div>
+
+	<thead>
+
+		<tr>
+			<td>#</td>
+			<td>Numero de orden</td>
+			<td>Precio</td>
+			<td>Cliente</td>
+			<td>Repartidor</td>
+			<td>Platillos</td>
+			<td>Estado Orden</td>
+			<td>Direccion</td>
+			<td>Acciones</td>
+		</tr>
+
+	</thead>
+	<tbody>
+		{% if ordenes %}
+		{% for orden in ordenes%}
+		<tr>
+			<td></td>
+			<td>{{orden.id_orden}}</td>
+			<td>{{orden.precio_orden}}</td>
+			<td>{{orden.id_cliente_orden}}</td>
+			<td>{{orden.id_repartidor_orden}}</td>
+			<td>
+			{% for platillo in orden.id_platillo_orden.all %}
+				{{platillo}}
+			{% endfor %}
+			</td>
+			<td>{{orden.id_estado_orden}}</td>
+			<td>{{orden.direccion_entrega_orden}}</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+		<h1>No tienes órdenes realizadas</h1>
+
+		{% endif %}
+
+	</tbody>
+</table>
+
+</body>
+</html>

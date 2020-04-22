@@ -1,28 +1,36 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/repartidor/registro-repartidor.css' %}">
+        <link rel="stylesheet" href="{% static 'css/repartidor/index-repartidor.css' %}">
 		<title>Registrar repartidor</title>
 	</head>
 	<body>
-		<h1>Registrar un nuevo repartidor</h1>
+		<h1 id="mensaje-bienvenida">Deliver&Eats</h1>
 
-		<form class="formulario-repartidor" action="." method="POST" enctype="multipart/form-data">
-			{% csrf_token %}
+        <div class="contenedor">
+            <div class="contenedor-menu">
+                <h2>Registrar repartidor</h2>
+        		<form class="formulario-repartidor" action="." method="POST" enctype="multipart/form-data">
+        			{% csrf_token %}
 
-			{% for field in form %}
-			<div class="formulario-repartidor-informacion">
+        			{% for field in form %}
+        			<div class="formulario-repartidor-informacion">
+                        {% if not field.is_hidden%}
+                            {{ field }}
+                            {{ field.errors }}
+                        {% endif %}
 
-                {% if not field.is_hidden%}
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {{ field.errors }}
-                {% endif %}
+        			</div>
+        			{% endfor %}
+        			<input value="Registrar" type="submit" class="btn">
+        		</form>
+            </div>
+        </div>
 
-			</div>
-			{% endfor %}
-			<input value="Registrar" type="submit" id="guardar-repartidor-btn">
-		</form>
 	</body>
 </html>

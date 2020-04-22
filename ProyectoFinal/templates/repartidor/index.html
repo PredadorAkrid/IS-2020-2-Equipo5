@@ -1,11 +1,22 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Este es el template para los repartidores</h1>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'css/repartidor/index-repartidor.css' %}">
+        <title>Repartidor</title>
+    </head>
+    <body>
+        <h1 id="mensaje-bienvenida">Bienvenido repartidor | Deliver&Eats</h1>
+        <div class="contenedor">
+            <div class="contenedor-menu">
+                <h2>¿Qué deseas hacer?</h2>
+                <a href="ordenes-para-recoleccion/" class="btn">Órdenes listas para recolección</a>
+                <a href="ordenes-asignadas/" class="btn">Tus órdenes asignadas</a>
+                <a href="ordenes-realizadas" class="btn">Historial de entregas</a>
+            </div>
+        </div>
+    </body>
 </html>

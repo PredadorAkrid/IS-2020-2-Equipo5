@@ -1,6 +1,9 @@
 """Vistas Repartidor"""
 #Django
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from administrador.models import Orden, EstadoOrden
 from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
@@ -9,15 +12,14 @@ from django.http import HttpResponse
 from django.views import View
 from .forms import *
 
-class IndexRepartidor(View):
-    """Pagina Index para los platillos"""
+# Página de inicio para repartidores
+@staff_member_required
+def index_repartidor(request):
+    if request.method == "GET":
+        return render(request, "repartidor/index.html")
+    elif request.method == "POST":
+        return HttpResponseForbidden()
 
-    template = "repartidor/index.html"
-
-    def get(self, request):
-        print("llega a repartidores")
-        """Metodo Get"""
-        return render(request, self.template)
 
 class RegistroRepartidor(View):
     """Registro nuevo repartidor"""
@@ -63,3 +65,53 @@ class RegistroRepartidor(View):
         email.send()
 
         return HttpResponse("<h1>Repartidor registrado</h1>")
+
+# Función que despliega la lista de ordenes listas para recolección
+@staff_member_required
+def ordenes_para_recoleccion(request):
+    ordenes_recoleccion = Orden.objects.filter(id_estado_orden=3).order_by('id_orden')
+    contexto = {'ordenes' : ordenes_recoleccion}
+    return render(request, "repartidor/ordenes_para_recoleccion.html", contexto)
+
+#Funcion que despliega las ordenes asignadas a un repartidor
+@staff_member_required
+def ordenes_asignadas(request):
+    repartidor = Repartidor.objects.get(user=request.user)
+    estado = EstadoOrden.objects.get(id_estado=4)
+    ordenes_asignadas = Orden.objects.filter(id_repartidor_orden=repartidor, id_estado_orden=estado).order_by('id_orden')
+    contexto = {'ordenes' : ordenes_asignadas}
+    return render(request, "repartidor/ordenes_asignadas.html", contexto)
+
+#Función que permite a un repartidor seleccionar una orden y comenzar su entrega.
+#Cambia el estado de la orden a "4: Pedido recolectado"
+#Asigna al repartidor a la orden
+@staff_member_required
+def comenzar_entrega(request, pk):
+    orden_por_entregar = Orden.objects.get(id_orden=pk)
+    repartidor = Repartidor.objects.get(user=request.user)
+    estado = EstadoOrden.objects.get(id_estado=4)
+
+    orden_por_entregar.id_estado_orden = estado
+    orden_por_entregar.id_repartidor_orden = repartidor
+    orden_por_entregar.save()
+    return redirect('repartidor:ordenes_asignadas')
+
+#Función que permite a un repartidor finalizar la entrega de una órden.
+#Cambia el estado de la orden a "5:"
+@staff_member_required
+def finalizar_entrega(request, pk):
+    orden_terminada = Orden.objects.get(id_orden=pk)
+    estado = EstadoOrden.objects.get(id_estado=5)
+
+    orden_terminada.id_estado_orden = estado
+    orden_terminada.save()
+    return redirect('repartidor:ordenes_asignadas')
+
+#Función que muestra al repartidor su historial de entregas realizadas
+@staff_member_required
+def ordenes_realizadas(request):
+    repartidor = Repartidor.objects.get(user=request.user)
+    estado = EstadoOrden.objects.get(id_estado=5)
+    ordenes_realizadas = Orden.objects.filter(id_repartidor_orden=repartidor, id_estado_orden=estado).order_by('id_orden')
+    contexto = {'ordenes' : ordenes_realizadas}
+    return render(request, "repartidor/ordenes_realizadas.html", contexto)
