@@ -109,7 +109,7 @@ class InicioSesionForm(AuthenticationForm):
             'id': 'id_username',
             'class': 'input100',
             'name': 'username',
-            'placeholder': 'Nombre'})  
+            'placeholder': 'Correo'})  
         self.fields['password'].widget = TextInput(attrs={
             'id': 'id_password',
             'class': 'input100',

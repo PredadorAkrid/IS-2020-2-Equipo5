@@ -60,8 +60,23 @@ class Index(View):
         )
         # As simple as telling django the user to login.
         login(request, user)
+        u = User.objects.get(username=user.username)
+        
+        cli = Cliente.objects.filter(user_cliente = u).first()
+        print(cli)
+        rep = Repartidor.objects.filter(user = u).first()
+        print(rep)
+        if(not(cli is None)):
+            return HttpResponse("<h1>Cliente logeado</h1>")
+        elif(not(rep is None)):
+            return render(request,"repartidor/index.html")
+        else:
+            if(u.is_superuser):
+                return render(request, "administrador/index.html")
+            else:    
+                return render("<h1>asdads</h1>")
+
         #print(user.user_cliente)
-        return render(request, "repartidor/index.html")
         
         """
         if user != None:
