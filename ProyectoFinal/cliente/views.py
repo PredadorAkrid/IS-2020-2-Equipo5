@@ -9,7 +9,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import *
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
-
+from .models import * 
+from repartidor.models import * 
 # Create your views here.
 
 class RegistroCliente(View):
@@ -59,8 +60,19 @@ class Index(View):
         )
         # As simple as telling django the user to login.
         login(request, user)
-
-        return HttpResponse("<h1>Usuario logeado!</h1>")
+        #print(user.user_cliente)
+        return render(request, "repartidor/index.html")
+        
+        """
+        if user != None:
+            login(request, user)
+            if(Cliente.objects.filter(user_cliente = user) == 1):
+                return HttpResponse("<h1>Usuario logeado!</h1>")
+            elif(Repartidor.objects.filter(user = user) == 1):
+                return render("repartidor/index.html")
+        else:
+            login(request, user)
+        """
 
 '''
 class InicioSesion(View):

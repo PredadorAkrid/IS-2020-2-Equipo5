@@ -13,7 +13,6 @@ urlpatterns = [
     path("ver-categorias/", lista_categoria, name="listar_categorias"),
     path("eliminar_categoria/", eliminar_categoria, name="eliminar_categoria"),
     path("editar_categoria/", editar_categoria, name="editar_categoria"),
-    path("selecciona_categoria/", selecciona_categoria,
-         name="selecciona_categoria"),
+    path("selecciona_categoria/", selecciona_categoria, name="selecciona_categoria"),
 
 ]
