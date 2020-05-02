@@ -63,9 +63,8 @@ class Index(View):
         u = User.objects.get(username=user.username)
         
         cli = Cliente.objects.filter(user_cliente = u).first()
-        print(cli)
+        
         rep = Repartidor.objects.filter(user = u).first()
-        print(rep)
         if(not(cli is None)):
             return HttpResponse("<h1>Cliente logeado</h1>")
         elif(not(rep is None)):
