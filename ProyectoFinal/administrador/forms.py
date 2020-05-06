@@ -50,6 +50,11 @@ class OrdenForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(OrdenForm, self).__init__(*args, **kwargs)
 		self.fields['id_cliente_orden'].widget.attrs['disabled'] = 'disabled'
+		self.fields['direccion_entrega_orden'].widget.attrs['disabled'] = 'disabled'
+		self.fields['precio_orden'].widget.attrs['disabled'] = 'disabled'
+
+
+
 
 
 		

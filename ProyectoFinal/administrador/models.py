@@ -46,4 +46,4 @@ class EstadoOrden(models.Model):
 		db_table = 'estado_orden'
 		verbose_name_plural = "EstadosOrden"
 	def __str__(self):
-		return '{}'.format(self.id_estado)
+		return '{}'.format(self.descripcion_estado)
