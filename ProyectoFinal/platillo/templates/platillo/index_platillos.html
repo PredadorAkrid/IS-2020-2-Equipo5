@@ -1,9 +1,14 @@
 {% load static %}
 <title> Deliver&Eats | Platillos</title>
-<link rel="stylesheet" type="text/css" href={% static 'platillo/css/index_platillos.css'%}> 
+<link rel="stylesheet" type="text/css" href={% static 'platillo/css/index_platillos.css'%}>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
 <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
 
 <body>
+  <div class="return-btn" style="text-align: start">
+        <a class="btn btn-primary" href="../../../administrador">Volver</a>
+  </div>
   <h1>Platillos</h1>
   <div id="container">
     <div><a href="{% url 'crear_platillo'%}"><button id="btnCrearPlatillo" type="button">Crear Platillo</button></a></div>

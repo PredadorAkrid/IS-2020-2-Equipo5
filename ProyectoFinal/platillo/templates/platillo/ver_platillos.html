@@ -3,6 +3,11 @@
 <link rel="stylesheet" type="text/css" href={% static 'platillo/css/ver_platillos.css'%}> 
 <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
 
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<div class="return-btn" style="text-align: start">
+        <a class="btn btn-primary" href="../../../platillo/">Volver</a>
+</div>
 <h1>Estos son todos los platillos</h1>
 
 {% for platillo_original in platillos%}
