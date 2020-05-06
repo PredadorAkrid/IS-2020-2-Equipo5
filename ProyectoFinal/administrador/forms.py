@@ -20,12 +20,12 @@ Formulario para editar las órdenes existentes como administrador
 '''
 
 class OrdenForm(forms.ModelForm):
-	precio_orden =  forms.IntegerField(required=True, label='Precio'),
-	id_cliente_orden =  forms.IntegerField(required=True, label='Cliente'),
+	precio_orden =  forms.IntegerField(required=False, label='Precio'),
+	id_cliente_orden =  forms.IntegerField(required=False, label='Cliente'),
 	id_repartidor_orden =  forms.IntegerField(required=False, label='Repartidor asignado'),
-	id_estado_orden = forms.IntegerField(required=True, max_value=5, min_value=1, label='Estado entrega'),
+	id_estado_orden = forms.IntegerField(required=False, max_value=5, min_value=1, label='Estado entrega'),
 	id_platillo_orden =  forms.MultipleChoiceField(required=True, label='Platillos'),
-	direccion_entrega_orden = forms.CharField(required=True, label='Direccion')
+	direccion_entrega_orden = forms.CharField(required=False, label='Direccion')
 	class Meta:
 		#Indicamos el modelo
 		model = Orden
@@ -47,5 +47,10 @@ class OrdenForm(forms.ModelForm):
 			'id_platillo_orden':'Platillos',
 			'direccion_entrega_orden':'Direccion entrega',
 		}
+	def __init__(self, *args, **kwargs):
+		super(OrdenForm, self).__init__(*args, **kwargs)
+		self.fields['id_cliente_orden'].widget.attrs['disabled'] = 'disabled'
+
+
 		
 	
