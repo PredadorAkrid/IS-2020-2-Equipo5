@@ -7,15 +7,21 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Órdenes listas para recolección</title>
-
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/ordenes/lista_ordenes.css' %}">
+
 </head>
 <body>
-<table class="table table-bordered">
 
-    <div class="return-btn" style="text-align: start">
+
+<div class="return-btn" style="text-align: start">
         <a class="btn btn-primary" href="{% url 'repartidor:index_repartidor' %}">Volver</a>
     </div>
+<div class="container">
+
+<table class="table table-bordered">
+
+    
 
 	<thead>
 
@@ -60,6 +66,8 @@
 
 	</tbody>
 </table>
+    </div>
+
 
 </body>
 </html>

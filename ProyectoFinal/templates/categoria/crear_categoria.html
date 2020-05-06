@@ -6,12 +6,15 @@
 	<title>Agregar categoria</title>
     <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'platillo/css/crear_platillo.css'%}"> 
+
 
 </head>
 <body>
 <div class="return-btn" style="text-align: start">
     <a class="btn btn-primary" href="../../../categoria/">Volver</a>
 </div>
+<div id="container">
 	<h1 align="center">Crea una categoría</h1>
     <br>
     <form action="../../../categoria/crear-categoria/" method="POST" enctype="multipart/form-data" align="center">
@@ -26,5 +29,6 @@
         <br>
         <input value="Confirmar" type="submit">
     </form>
+</div>
 </body>
 </html>

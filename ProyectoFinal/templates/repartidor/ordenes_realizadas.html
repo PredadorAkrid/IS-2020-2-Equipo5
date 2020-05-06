@@ -8,13 +8,18 @@
 	<title>Órdenes asignadas</title>
 
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/ordenes/lista_ordenes.css' %}">
+
 </head>
 <body>
+<div class="return-btn" style="text-align: start">
+        <a class="btn btn-primary" href="{% url 'repartidor:index_repartidor' %}">Volver</a>
+</div>
+<div class="container">
+
 <table class="table table-bordered">
 
-    <div class="return-btn" style="text-align: start">
-        <a class="btn btn-primary" href="{% url 'repartidor:index_repartidor' %}">Volver</a>
-    </div>
+    
 
 	<thead>
 
@@ -56,6 +61,7 @@
 
 	</tbody>
 </table>
+</div>
 
 </body>
 </html>
