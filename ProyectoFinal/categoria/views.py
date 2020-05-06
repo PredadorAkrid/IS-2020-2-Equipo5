@@ -93,21 +93,29 @@ def editar_categoria(request):
     if request.method == 'GET':
         categoria_original = Categoria.objects.get(
             pk=request.session.get('id_categoria'))
-        formulario = FromularioEditarCategoria(instance=categoria_original)
+        formulario = FormularioEditarCategoria(instance=categoria_original)
         contexto = {"formulario": formulario,
                     "categoria_original": categoria_original}
         return render(request, template, contexto)
     if request.method == 'POST':
         categoria_original = Categoria.objects.get(
-            pk=request.session.get('id_categoria'))
-        formulario = FromularioEditarCategoria(
+        pk=request.session.get('id_categoria'))
+        formulario = FormularioEditarCategoria(
             request.POST, instance=categoria_original)
-        if formulario.is_valid():
+        if not formulario.is_valid():
+            context = {"formulario": formulario}
+            return render(request, 'categoria/editar_categoria.html', context)
+        else:
             nombre = formulario.cleaned_data["nombre_categoria"]
             categoria_original.nombre_categoria = nombre
             formulario.save()
             return redirect('categoria:selecciona_categoria')
-    return HttpResponse("Error al editar categoria")
+        #if formulario.is_valid():
+        #    nombre = formulario.cleaned_data["nombre_categoria"]
+        #    categoria_original.nombre_categoria = nombre
+        #    formulario.save()
+        #    return redirect('categoria:selecciona_categoria')
+        #return render(request, 'categoria/editar_categoria.html', {'form': formulario})
 
 
 @login_required

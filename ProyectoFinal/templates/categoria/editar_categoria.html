@@ -1,6 +1,6 @@
 {% load static %}
 <title>Deliver&Eats | Crear Platillo</title>
-<link rel="stylesheet" type="text/css" href={% static 'css/categoria/editar_categoria.css'%}> 
+<link rel="stylesheet" type="text/css" href="{% static 'css/categoria/editar_categoria.css'%}"> 
 <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
@@ -12,10 +12,21 @@
   <div></div>
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ formulario.errors }}
-        {{ formulario.label_tag }}
-        <label for="nombre">Nuevo nombre</label><br>
+        <!--
         {{ formulario.nombre_categoria }}<br>
+        {{ formulario.errors }}
+        -->
+        <label for="nombre">Nuevo nombre</label>
+
+        {% for field in formulario %}
+                    <div class="wrap-input100 validate-input m-b-20">
+                    {{ field }}
+                    <span class="focus-input100"></span>
+                    {{ field.errors }}
+                    </div>
+                    <br>
+        {% endfor %}
+        
         <input id="btnCrear" value="Editar" type="submit">
     </form>
     <div></div>

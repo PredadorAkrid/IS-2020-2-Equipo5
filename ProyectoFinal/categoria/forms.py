@@ -32,7 +32,7 @@ class FormularioSeleccionCategoria(forms.ModelForm):
         fields = ("seleccion",)
 
 
-class FromularioEditarCategoria(forms.ModelForm):
+class FormularioEditarCategoria(forms.ModelForm):
     """Formulario para editar una categoria"""
     nombre_categoria = forms.CharField(required=True,  max_length=100, label='Nombre Categoria', widget=forms.TextInput(
         attrs={'class': 'campo', 'name': 'nombre'}))
@@ -45,7 +45,6 @@ class FromularioEditarCategoria(forms.ModelForm):
 
     def clean_nombre_categoria(self):
         data = self.cleaned_data.get('nombre_categoria')
-        print("esto es data " + data)
         if Categoria.objects.filter(nombre_categoria=data).count() > 0:
             raise forms.ValidationError("Esta categoría ya existe")
         return data
