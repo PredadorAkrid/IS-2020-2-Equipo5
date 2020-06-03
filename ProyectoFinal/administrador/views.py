@@ -65,11 +65,9 @@ def editar_orden(request,  pk):
         est = EstadoOrden.objects.filter(id_estado = request.POST['id_estado_orden']).first()
         orden_a_editar.id_estado_orden =  est
         orden_a_editar.id_platillo_orden.set = request.POST['id_platillo_orden']
-        direccion = Direccion.objects.filter(id_direccion = request.POST['direccion_entrega_orden']).first()
+        direccion = Direccion.objects.filter(id_direccion = request.POST.get('direccion_entrega_orden')).first()
         orden_a_editar.direccion_entrega_orden = direccion
         orden_a_editar.save();
-        
-
         return redirect('administrador:listar_ordenes')
     return render(request, 'administrador/ordenes.html', {'form': form})
 

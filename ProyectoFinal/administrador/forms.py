@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-
+from cliente.models import * 
 
 '''Descontinuado 
 class AdminForm(forms.ModelForm):
@@ -49,13 +49,7 @@ class OrdenForm(forms.ModelForm):
 		}
 	def __init__(self, *args, **kwargs):
 		super(OrdenForm, self).__init__(*args, **kwargs)
-		self.fields['id_cliente_orden'].widget.attrs['disabled'] = 'disabled'
-		self.fields['direccion_entrega_orden'].widget.attrs['disabled'] = 'disabled'
-		self.fields['precio_orden'].widget.attrs['disabled'] = 'disabled'
-
-
-
-
-
-		
-	
+		instance = kwargs.get('instance', None)
+		usuario =User.objects.filter(email = instance.id_cliente_orden).first()
+		cliente = Cliente.objects.filter(user_cliente = usuario).first()
+		self.fields['direccion_entrega_orden']= forms.ModelChoiceField(queryset=Direccion.objects.filter(id_cliente = cliente.id_cliente))

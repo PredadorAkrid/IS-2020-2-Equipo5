@@ -23,7 +23,7 @@ class Orden(models.Model):
 	id_repartidor_orden = models.ForeignKey('repartidor.Repartidor',on_delete= models.SET_NULL, blank =True,  null=True)
 	id_platillo_orden  = models.ManyToManyField('platillo.Platillo', null=True)
 	id_estado_orden =    models.ForeignKey('EstadoOrden',  on_delete=models.SET_DEFAULT, default=0)
-	direccion_entrega_orden  = models.ForeignKey('cliente.Direccion', null=False, on_delete=models.CASCADE)
+	direccion_entrega_orden  = models.ForeignKey('cliente.Direccion', null=True, on_delete=models.CASCADE)
 	#Definimos el nombre de la tabla  y el nombre plural para el panel de administrador
 	class Meta:
 		db_table = 'orden'
