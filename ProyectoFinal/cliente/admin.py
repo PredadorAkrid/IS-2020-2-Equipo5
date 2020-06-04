@@ -4,4 +4,5 @@ from .models import *
 # Register your models here.
 admin.site.register(Cliente)
 admin.site.register(Direccion)
+admin.site.register(Carrito)
 

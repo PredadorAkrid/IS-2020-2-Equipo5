@@ -12,6 +12,7 @@ from .forms import *
 from .models import * 
 from repartidor.models import * 
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 
 class RegistroCliente(View):
     """New User Sign Up."""
@@ -66,7 +67,7 @@ class Index(View):
         
         rep = Repartidor.objects.filter(user = u).first()
         if(not(cli is None)):
-            return HttpResponse("<h1>Cliente logeado</h1>")
+            return redirect('cliente:HomeCliente')
         elif(not(rep is None)):
             return render(request,"repartidor/index.html")
         else:
@@ -74,47 +75,69 @@ class Index(View):
                 return render(request, "administrador/index.html")
             else:    
                 return render("<h1>asdads</h1>")
+@login_required                
+def HomeCliente(request):
+    if request.method == "GET":
+        return render(request, "cliente/home.html")
 
-        #print(user.user_cliente)
-        
-        """
-        if user != None:
-            login(request, user)
-            if(Cliente.objects.filter(user_cliente = user) == 1):
-                return HttpResponse("<h1>Usuario logeado!</h1>")
-            elif(Repartidor.objects.filter(user = user) == 1):
-                return render("repartidor/index.html")
-        else:
-            login(request, user)
-        """
-
-'''
-class InicioSesion(View):
-    """Cliente Inicio Sesión."""
-    def get(self, request):
-        """Render sign up form."""
-        form = InicioSesionForm()
-        context = {"form": form}
-        return render(request, "cliente/index.html", context)
-    def post(self, request):
-
-        """Receive and validate sign up form."""
-        form = InicioSesionForm(data=request.POST)
-        if not form.is_valid():
-            context = {"form": form}
-            return render(request, "cliente/index.html", context)
-        
-        user = authenticate(
-            username=form.cleaned_data["username"],
-            password=form.cleaned_data["password"],
-        )
-        # As simple as telling django the user to login.
-        login(request, user)
-
-        return HttpResponse("<h1>User logged!</h1>")
-    
-'''
 class CerrarSesion(View):
     def get(self, request):
         logout(request)
         return redirect("cliente:IndexCliente")
+
+@login_required
+def CarritoView(request):
+    if request.method == 'GET':
+        #user = request.user
+        #user_1 = User.objects.get(id=user.id)
+        #cliente = Cliente.objects.filter(user_cliente = user_1).first()
+        #print(cliente)
+        carrito = Carrito.objects.all()
+        print(carrito)
+        return redirect("cliente:IndexCliente")
+'''
+@login_required
+def cart_add(request, pk):
+
+    cart = Cart(request)
+    product = Platillo.objects.get(id_platillo=pk)
+    cart.add(product=product)
+    return redirect("home")
+'''
+'''
+
+@login_required
+def item_clear(request, id):
+    cart = Cart(request)
+    product = Platillo.objects.get(id_platillo=id)
+    cart.remove(product)
+    return redirect("cart_detail")
+
+
+@login_required
+def item_increment(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id_platillo=id)
+    cart.add(product=product)
+    return redirect("cart_detail")
+
+
+@login_required
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id_platillo=id)
+    cart.decrement(product=product)
+    return redirect("cart_detail")
+
+
+@login_required
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("cart_detail")
+
+
+@login_required
+def cart_detail(request):
+    return render(request, 'cart/cart_detail.html')
+'''

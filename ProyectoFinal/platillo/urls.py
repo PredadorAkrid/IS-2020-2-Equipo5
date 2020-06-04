@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 # imports para autenticar el usuario
 from django.core.exceptions import PermissionDenied
@@ -29,5 +29,6 @@ urlpatterns = [
     path('eliminar', superuser_only(
         views.EliminarPlatillo.as_view()), name="eliminar"),
     path('ver', superuser_only(views.VerPlatillos.as_view()), name="ver"),
+
 ]
 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from platillo.models import *
 
 #Tabla cliente para guardar los clientes de la aplicación
 class Cliente(models.Model):
@@ -27,3 +28,14 @@ class Direccion(models.Model):
         unique_together = (('id_cliente', 'descripcion_direccion' ))
     def __str__(self):
         return '{}'.format(self.descripcion_direccion)
+
+class Carrito(models.Model):
+    id_platillo_carrito = models.IntegerField(primary_key=True,null=False),
+    id_cliente_carrito =models.IntegerField(primary_key=True,null=False),
+    cantidad_carrito = models.IntegerField(null=False, default = 0),
+    precio_platillo_carrito = models.IntegerField(null=False, default = 0),
+    
+    class Meta:
+        db_table = 'carrito'
+        verbose_name_plural = "Carritos"
+    
