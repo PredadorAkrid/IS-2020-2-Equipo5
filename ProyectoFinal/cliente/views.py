@@ -104,7 +104,7 @@ def cart_add(request, pk):
     user_1 = User.objects.get(id=user.id)
     cliente = Cliente.objects.filter(user_cliente = user_1).first()
     product = Platillo.objects.get(id=pk)
-    agregado_carrito = Carrito(id_platillo_carrito = product.id , id_cliente_carrito = cliente.id_cliente, precio_platillo_carrito=product.precio)
+    agregado_carrito = Carrito(id_platillo_carrito = product.id , nombre_platillo_carrito = product.nombre , id_cliente_carrito = cliente.id_cliente, precio_platillo_carrito=product.precio)
     agregado_carrito.save()
     return redirect('cliente:carrito')
 
@@ -116,7 +116,7 @@ def item_clear(request, pk):
     user_1 = User.objects.get(id=user.id)
     cliente = Cliente.objects.filter(user_cliente = user_1).first()
     product = Platillo.objects.get(id=pk)
-    Carrito.objects.filter(id_platillo_carrito=product.id , id_cliente_carrito=cliente.id_cliente).delete()
+    Carrito.objects.filter(id_platillo_carrito=product.id,  id_cliente_carrito=cliente.id_cliente).delete()
     return redirect('cliente:carrito')
 
 '''

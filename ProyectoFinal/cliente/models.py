@@ -31,6 +31,7 @@ class Direccion(models.Model):
 
 class Carrito(models.Model):
     id_platillo_carrito = models.PositiveIntegerField()
+    nombre_platillo_carrito = models.CharField(max_length=100)
     id_cliente_carrito =models.PositiveIntegerField()
     precio_platillo_carrito = models.PositiveIntegerField()
     class Meta:
@@ -39,4 +40,4 @@ class Carrito(models.Model):
         unique_together = (('id_platillo_carrito', 'id_cliente_carrito' ))
         def __str__(self):
             return self.id_platillo_carrito + " " + self.id_cliente_carrito + " " + self.cantidad_carrito + " " + self.precio_platillo_carrito
-    
+        

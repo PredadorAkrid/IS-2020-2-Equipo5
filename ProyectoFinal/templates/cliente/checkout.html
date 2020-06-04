@@ -23,8 +23,10 @@
 
 		<tr>
 			<td>#</td>
-			<td>Platillos</td>
+			<td>Id producto</td>
+			<td>Platillo</td>
 			<td>Precio producto</td>
+			<td>Acciones</td>
 
 		</tr>
 		
@@ -35,6 +37,8 @@
 		<tr>
 			<td></td>
 			<td>{{item.id_platillo_carrito}}</td>
+			<td>{{item.nombre_platillo_carrito}}</td>
+
 			<td>{{item.precio_platillo_carrito}}</td>
 			<td>
 				<a class="btn btn-danger" href="{% url 'cliente:item_clear' item.id_platillo_carrito %}">Eliminar</a>	
