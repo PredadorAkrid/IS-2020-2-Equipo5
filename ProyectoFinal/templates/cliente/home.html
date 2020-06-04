@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="">
-</head>
-<body>
-	sdfsdfsfdfsdfsd
-	
-</body>
-</html>
+<html lang="en">
+  <head>
+    {% load static%}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index_administrador.css'%}"> 
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+    <title>Deliver&Eats | Cliente</title>
+  </head>
+  <body>
+    <h1>Bienvenid@ de vuelta</h1>
+    <div id="seleccion">
+      <div id="container">
+        <div><a href="{% url 'ver'%}"><button type="button">Ver platillos</button></a></div>
+        <div><a href="../../../administrador/lista-ordenes/"><button  type="button">----</button></a></div>
+        <div><a href="../../../categoria"><button type="button">----</button></a></div>
+        <div><a href="./../../repartidor/registro-repartidor/"><button  type="button">-----</button></a></div>
+        <div><a href="{% url 'platillos'%}"><button type="button">----</button></a></div>
+        <div><a href="{% url 'platillos'%}"><button  type="button">----</button></a></div>
+        <div><a href="../../../cerrar-sesion/"><button type="button">Cerrar Sesión</button></a></div>
+      </div>
+    </div>
+  </body>

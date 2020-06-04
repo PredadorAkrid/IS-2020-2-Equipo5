@@ -32,7 +32,6 @@ class Direccion(models.Model):
 class Carrito(models.Model):
     id_platillo_carrito = models.PositiveIntegerField()
     id_cliente_carrito =models.PositiveIntegerField()
-    cantidad_carrito = models.PositiveIntegerField()
     precio_platillo_carrito = models.PositiveIntegerField()
     class Meta:
         db_table = 'carrito'

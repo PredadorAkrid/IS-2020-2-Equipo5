@@ -88,35 +88,38 @@ class CerrarSesion(View):
 @login_required
 def CarritoView(request):
     if request.method == 'GET':
-
         user = request.user
-        
         user_1 = User.objects.get(id=user.id)
         print(user_1)
         cliente = Cliente.objects.filter(user_cliente = user_1).first()
         print(cliente)
         carrito = Carrito.objects.filter(id_cliente_carrito = cliente.id_cliente).all()
+        
         context = {'carrito':carrito}
-        return render(request, "cliente/carrito.html", context)
-'''
+        return render(request, "cliente/checkout.html", context)
+
 @login_required
 def cart_add(request, pk):
+    user = request.user
+    user_1 = User.objects.get(id=user.id)
+    cliente = Cliente.objects.filter(user_cliente = user_1).first()
+    product = Platillo.objects.get(id=pk)
+    agregado_carrito = Carrito(id_platillo_carrito = product.id , id_cliente_carrito = cliente.id_cliente, precio_platillo_carrito=product.precio)
+    agregado_carrito.save()
+    return redirect('cliente:carrito')
 
-    cart = Cart(request)
-    product = Platillo.objects.get(id_platillo=pk)
-    cart.add(product=product)
-    return redirect("home")
-'''
-'''
+
 
 @login_required
-def item_clear(request, id):
-    cart = Cart(request)
-    product = Platillo.objects.get(id_platillo=id)
-    cart.remove(product)
-    return redirect("cart_detail")
+def item_clear(request, pk):
+    user = request.user
+    user_1 = User.objects.get(id=user.id)
+    cliente = Cliente.objects.filter(user_cliente = user_1).first()
+    product = Platillo.objects.get(id=pk)
+    Carrito.objects.filter(id_platillo_carrito=product.id , id_cliente_carrito=cliente.id_cliente).delete()
+    return redirect('cliente:carrito')
 
-
+'''
 @login_required
 def item_increment(request, id):
     cart = Cart(request)

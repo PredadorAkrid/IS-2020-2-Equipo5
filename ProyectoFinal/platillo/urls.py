@@ -28,7 +28,9 @@ urlpatterns = [
          superuser_only(views.EditarPlatillo.as_view()), name="editar"),
     path('eliminar', superuser_only(
         views.EliminarPlatillo.as_view()), name="eliminar"),
-    path('ver', superuser_only(views.VerPlatillos.as_view()), name="ver"),
+    #deprecated 
+    #path('ver', superuser_only(views.VerPlatillos.as_view()), name="ver"),
+    path('ver', views.VerPlatillos.as_view(), name="ver"),
 
 ]
 
