@@ -65,7 +65,8 @@ def editar_orden(request,  pk):
         orden_a_editar.id_repartidor_orden = rep
         est = EstadoOrden.objects.filter(id_estado = request.POST['id_estado_orden']).first()
         orden_a_editar.id_estado_orden =  est
-        print(request.POST.getlist('id_platillo_orden'))
+        
+        orden_a_editar.id_platillo_orden.clear()
         precio  = 0
         for id_aux in request.POST.getlist('id_platillo_orden'):
             plat = Platillo.objects.filter(id=id_aux).first()
