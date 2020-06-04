@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from cliente.models import * 
+from platillo.models import *
 def superuser_only(function):
     def _inner(request, *args, **kwargs):
         if not request.user.is_superuser:
@@ -58,16 +59,25 @@ def editar_orden(request,  pk):
     # Si es una petición post entonces guardamos los datos del formulario
     elif request.method == 'POST':
         # validamos el form
-
-
+        
+    
         rep = Repartidor.objects.filter(id_repatidor = request.POST['id_repartidor_orden']).first()
         orden_a_editar.id_repartidor_orden = rep
         est = EstadoOrden.objects.filter(id_estado = request.POST['id_estado_orden']).first()
         orden_a_editar.id_estado_orden =  est
-        orden_a_editar.id_platillo_orden.set = request.POST['id_platillo_orden']
+        print(request.POST.getlist('id_platillo_orden'))
+        precio  = 0
+        for id_aux in request.POST.getlist('id_platillo_orden'):
+            plat = Platillo.objects.filter(id=id_aux).first()
+            precio += plat.precio
+            orden_a_editar.id_platillo_orden.add(plat)
+        orden_a_editar.precio_orden = precio
+        #orden_a_editar.id_platillo_orden.set = request.POST.getlist('id_platillo_orden')
+        #Orden.objects.filter(id_orden=orden_a_editar.id_orden).update(id_platillo_orden)
+
         direccion = Direccion.objects.filter(id_direccion = request.POST.get('direccion_entrega_orden')).first()
         orden_a_editar.direccion_entrega_orden = direccion
-        orden_a_editar.save();
+        orden_a_editar.save()
         return redirect('administrador:listar_ordenes')
     return render(request, 'administrador/ordenes.html', {'form': form})
 
