@@ -88,13 +88,16 @@ class CerrarSesion(View):
 @login_required
 def CarritoView(request):
     if request.method == 'GET':
-        #user = request.user
-        #user_1 = User.objects.get(id=user.id)
-        #cliente = Cliente.objects.filter(user_cliente = user_1).first()
-        #print(cliente)
-        carrito = Carrito.objects.all()
-        print(carrito)
-        return redirect("cliente:IndexCliente")
+
+        user = request.user
+        
+        user_1 = User.objects.get(id=user.id)
+        print(user_1)
+        cliente = Cliente.objects.filter(user_cliente = user_1).first()
+        print(cliente)
+        carrito = Carrito.objects.filter(id_cliente_carrito = cliente.id_cliente).all()
+        context = {'carrito':carrito}
+        return render(request, "cliente/carrito.html", context)
 '''
 @login_required
 def cart_add(request, pk):

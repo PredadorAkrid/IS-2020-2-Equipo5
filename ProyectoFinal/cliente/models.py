@@ -30,12 +30,14 @@ class Direccion(models.Model):
         return '{}'.format(self.descripcion_direccion)
 
 class Carrito(models.Model):
-    id_platillo_carrito = models.IntegerField(primary_key=True,null=False),
-    id_cliente_carrito =models.IntegerField(primary_key=True,null=False),
-    cantidad_carrito = models.IntegerField(null=False, default = 0),
-    precio_platillo_carrito = models.IntegerField(null=False, default = 0),
-    
+    id_platillo_carrito = models.PositiveIntegerField()
+    id_cliente_carrito =models.PositiveIntegerField()
+    cantidad_carrito = models.PositiveIntegerField()
+    precio_platillo_carrito = models.PositiveIntegerField()
     class Meta:
         db_table = 'carrito'
         verbose_name_plural = "Carritos"
+        unique_together = (('id_platillo_carrito', 'id_cliente_carrito' ))
+        def __str__(self):
+            return self.id_platillo_carrito + " " + self.id_cliente_carrito + " " + self.cantidad_carrito + " " + self.precio_platillo_carrito
     
