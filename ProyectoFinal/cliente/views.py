@@ -119,31 +119,10 @@ def item_clear(request, pk):
     Carrito.objects.filter(id_platillo_carrito=product.id,  id_cliente_carrito=cliente.id_cliente).delete()
     return redirect('cliente:carrito')
 
-'''
 @login_required
-def item_increment(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id_platillo=id)
-    cart.add(product=product)
-    return redirect("cart_detail")
-
-
-@login_required
-def item_decrement(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id_platillo=id)
-    cart.decrement(product=product)
-    return redirect("cart_detail")
-
-
-@login_required
-def cart_clear(request):
-    cart = Cart(request)
-    cart.clear()
-    return redirect("cart_detail")
-
-
-@login_required
-def cart_detail(request):
-    return render(request, 'cart/cart_detail.html')
-'''
+def confirmar(request):
+    user = request.user
+    user_1 = User.objects.get(id=user.id)
+    cliente = Cliente.objects.filter(user_cliente = user_1).first()
+    ##Aquí podrías obtener las direcciones del usuario para ponerlas en un form o algo así
+    return redirect('cliente:carrito')

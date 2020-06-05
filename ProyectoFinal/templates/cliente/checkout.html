@@ -6,55 +6,45 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Lista de órdenes</title>
-	
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/cliente/carrito-checkout.css' %}">
-
 </head>
 <body>
-<div class="return-btn" style="text-align: start">
-<a class="btn btn-primary" href="../../../cliente/">Volver</a>
-</div>
-<div class="container">
+	<div class="return-btn" style="text-align: start">
+	<a class="btn btn-primary" href="../../../home/">Volver</a>
+	</div>
+	<div class="container">
+	<table class="table table-bordered">
+		<thead>
 
-<table class="table table-bordered">
-
-	<thead>
-
-		<tr>
-			<td>#</td>
-			<td>Id producto</td>
-			<td>Platillo</td>
-			<td>Precio producto</td>
-			<td>Acciones</td>
-
-		</tr>
-		
-	</thead>
-	<tbody>
-		{% if carrito %}
-		{% for item in carrito%}
-		<tr>
-			<td></td>
-			<td>{{item.id_platillo_carrito}}</td>
-			<td>{{item.nombre_platillo_carrito}}</td>
-
-			<td>{{item.precio_platillo_carrito}}</td>
-			<td>
-				<a class="btn btn-danger" href="{% url 'cliente:item_clear' item.id_platillo_carrito %}">Eliminar</a>	
-			</td>
-		</tr>
-		{% endfor %}
-		{% else %}
-		<h1 align="center">Aún no agregas ningún platillo</h1>
-
-		{% endif %}
-	
-	</tbody>
-</table> 
-	
-</div>
-
-
+			<tr>
+				<td>#</td>
+				<td>Id producto</td>
+				<td>Platillo</td>
+				<td>Precio producto</td>
+				<td>Acciones</td>
+			</tr>
+			
+		</thead>
+		<tbody>
+			{% if carrito %}
+			{% for item in carrito%}
+			<tr>
+				<td></td>
+				<td>{{item.id_platillo_carrito}}</td>
+				<td>{{item.nombre_platillo_carrito}}</td>
+				<td>{{item.precio_platillo_carrito}}</td>
+				<td>
+					<a class="btn btn-danger" href="{% url 'cliente:item_clear' item.id_platillo_carrito %}">Eliminar</a>	
+				</td>
+			</tr>
+			{% endfor %}
+			{% else %}
+			<h1 align="center">Aún no agregas ningún platillo</h1>
+			{% endif %}	
+		</tbody>
+	</table>
+	<a class="btn btn-primary" href="{% url 'cliente:confirmar' %}" >Confirmar</a> 	
+	</div>
 </body>
 </html>
