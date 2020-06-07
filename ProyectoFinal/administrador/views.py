@@ -60,9 +60,9 @@ def editar_orden(request,  pk):
     elif request.method == 'POST':
         # validamos el form
         
-    
-        rep = Repartidor.objects.filter(id_repatidor = request.POST['id_repartidor_orden']).first()
-        orden_a_editar.id_repartidor_orden = rep
+        #depreciamos el rapartidor
+        #rep = Repartidor.objects.filter(id_repatidor = request.POST['id_repartidor_orden']).first()
+        #orden_a_editar.id_repartidor_orden = rep
         est = EstadoOrden.objects.filter(id_estado = request.POST['id_estado_orden']).first()
         orden_a_editar.id_estado_orden =  est
         
