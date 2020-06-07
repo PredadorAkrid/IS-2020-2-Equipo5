@@ -82,6 +82,13 @@ class Index(View):
 
 
 @login_required
+def ver_menu(request):
+    platillos = Platillo.objects.all()
+    contexto = {"platillos": platillos}
+    return render(request, "cliente/ver_menu.html", contexto)
+
+
+@login_required
 def HomeCliente(request):
     if request.method == "GET":
         return render(request, "cliente/home.html")
@@ -143,19 +150,21 @@ def confirmar(request):
     if request.method == 'GET':
         direcciones = Direccion.objects.filter(id_cliente=cliente)
         formulario = AgregarDireccion()
-        contexto = {"formulario": formulario, "direcciones": direcciones}
+        contexto = {"formulario": formulario,
+                    "direcciones": direcciones, "cliente": cliente}
         return render(request, "cliente/agregar_seleccionar_direccion.html", contexto)
 
     if request.method == 'POST':
         if 'agregar' in request.POST:
             formulario = AgregarDireccion(request.POST)
             if formulario.is_valid():
-                id_cliente = cliente_id
-                descripcion_direccion = formulario.cleaned_data["direccion"]
-                print("******************************************************")
-                print(id_cliente)
-                print(descripcion_direccion)
+                id_cliente = formulario.cleaned_data["id_cliente"]
+                descripcion_direccion = formulario.cleaned_data["descripcion_direccion"]
                 formulario.save()
-                # return render(request, "cliente/agregar_seleccionar_direccion.html")
-                return HttpResponse("Peiddo realizado")
-        return HttpResponse("Error guardar direccion")
+                return redirect('cliente:confirmar')
+        if 'seleccion' in request.POST:
+            # Aquí ya puedes redirigir a donde quieras con la informacion de post dejo una pagina de prueba (el post te va a mandar el id de la direccion)
+            direccion_seleccionada = request.POST.get("seleccion", "")
+            return HttpResponse("Direccion Seleccionada: " + direccion_seleccionada)
+
+    return HttpResponse("Ocurrio un error interno, intentalo más tarde")

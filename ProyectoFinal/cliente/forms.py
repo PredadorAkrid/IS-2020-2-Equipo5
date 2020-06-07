@@ -128,10 +128,10 @@ class InicioSesionForm(AuthenticationForm):
 
 class AgregarDireccion(forms.ModelForm):
     """Formulario para agregar una direccion"""
-    direccion = forms.CharField(
-        label="direccion", max_length=250, required=True)
+    descripcion_direccion = forms.CharField(
+        label="direccion", max_length=200, required=True)
 
     class Meta:
         db_table = "direccion"
-        model = User
-        fields = ("direccion",)
+        model = Direccion
+        fields = ("descripcion_direccion", "id_cliente")

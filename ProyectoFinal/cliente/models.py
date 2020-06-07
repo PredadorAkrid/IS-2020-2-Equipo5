@@ -8,7 +8,7 @@ from platillo.models import *
 class Cliente(models.Model):
     user_cliente = models.OneToOneField(
         User, on_delete=models.CASCADE, unique=True)
-    id_cliente = models.AutoField(primary_key=True)
+    id_cliente = models.AutoField(primary_key=True, db_column='id_cliente')
     nombre_cliente = models.CharField(max_length=64)
     apellido_pa_cliente = models.CharField(max_length=100)
     apellido_ma_cliente = models.CharField(max_length=100)

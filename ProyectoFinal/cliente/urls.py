@@ -22,6 +22,7 @@ urlpatterns = [
     path('cart/add/<int:pk>/', views.cart_add, name='cart_add'),
     path('cart/item_clear/<int:pk>/', views.item_clear, name='item_clear'),
     path('cart/item_clear/confirmar/', views.confirmar, name='confirmar'),
+    path('ver_menu/', views.ver_menu, name="ver_menu"),
 
     # path('cart/item_increment/<int:id>/',
     #     views.item_increment, name='item_increment'),

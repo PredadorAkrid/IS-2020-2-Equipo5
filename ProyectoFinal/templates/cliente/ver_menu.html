@@ -1,0 +1,32 @@
+{% load static %}
+<title> Deliver&Eats | Editar Platillo</title>
+<link rel="stylesheet" type="text/css" href={% static 'platillo/css/ver_platillos.css'%}> 
+<link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<div class="return-btn" style="text-align: start">
+        <a class="btn btn-primary" href="../../../home/">Volver</a>
+</div>
+<h1>Estos son todos los platillos</h1>
+
+{% for platillo_original in platillos%}
+    <div id="{{platillo.id}}">
+        <div class="card-container">
+  <div class="card u-clearfix">
+    <div class="card-body">
+      <span class="card-number card-circle subtle">{{platillo_original.id}}</span>
+      <span class="card-author subtle">${{platillo_original.precio}}MXN</span>
+      <h2 class="card-title">{{platillo_original.nombre}}</h2>
+      <span class="card-description subtle">{{platillo_original.descripcion}}</span>
+      <a class="btn btn-primary" href="{% url 'cliente:cart_add' platillo_original.id %}">Add To Cart</a>
+    </div>
+    <img src="{{platillo_original.imagen.url}}" alt="" class="card-media" height="360" width="auto"/>
+    
+    
+
+  </div>
+  <div class="card-shadow"></div>
+</div><br>
+    </div>
+{% endfor %}

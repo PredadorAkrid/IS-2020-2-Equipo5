@@ -1,33 +1,40 @@
 {% load static %}
 <title>Deliver&Eats | Direcciones</title>
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/direccion.css'%}"> 
+<link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
 
 <body>
   <div class="return-btn" style="text-align: start">
         <a class="btn btn-primary" href="../../../carrito/">Volver</a>
   </div>
-  <h1>Selecciona o agrega una dirección</h1>
-  <div id="container">
-  <div></div>
 
-    <form di="seleccion_direccion" action="" method="POST">
-        {% csrf_token %}
-        {% for direccion in direcciones%}
-            <div id="{{direccion.id_direccion}}" class="direccion">
-                {{direccion}}
-                <input id="{{direccion.id_direccion}}" value="Seleccion" type="submit">
+  <h1>selecciona o agrega una dirección para que enviemos tu pedido</h1>
+  
+  <div id="container">
+
+    <form action="" method="POST">
+        <div id="first">
+            {% csrf_token %}
+            {% for direccion in direcciones%}
+            <div class="contenido">
+                {{direccion.descripcion_direccion}}
             </div>
-        {% endfor %}
+                <button value="{{direccion.id_direccion}}" name="seleccion">Seleccionar</button>
+            {% endfor %}
+        </div>
     </form>
 
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST">
         {% csrf_token %}
         {{ formulario.errors }}
         {{ formulario.label_tag }}
         <label for="direccion">Nueva dirección</label><br>
-        {{ formulario.direccion }}<br>
+        {{ formulario.descripcion_direccion }}<br>
+        Ingresa tu usuario (CORREGIR)
+        {{ formulario.id_cliente}}<br>
         <input id="agregar" type="submit" name="agregar" value="Agregar">
     </form>
-
-    <div></div>
   </div>
+
 </body>
