@@ -186,7 +186,10 @@ def confirmar(request):
             orden_generada.save()
             for elem in carrito:
                 Carrito.objects.filter(id_platillo_carrito=elem.id_platillo_carrito, id_cliente_carrito=elem.id_cliente_carrito).delete()
-            return HttpResponse("Gracias por tu compra, estamos procesando tu compra, tú número de pedido es: " + str(orden_generada.id_orden))
+            x = str(orden_generada.id_orden)
+            contexto = {'x': x}
+            return render(request, "cliente/confirmacion.html", contexto)
+
 
     return HttpResponse("Ocurrio un error interno, intentalo más tarde")
 

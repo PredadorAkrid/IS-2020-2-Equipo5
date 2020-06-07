@@ -39,12 +39,13 @@
 				</td>
 			</tr>
 			{% endfor %}
-			{% else %}
-			<h1 align="center">Aún no agregas ningún platillo</h1>
-			{% endif %}	
+				
 		</tbody>
 	</table>
 	<a class="btn btn-primary" href="{% url 'cliente:confirmar' %}" >Confirmar</a> 	
 	</div>
+	{% else %}
+		<h1 align="center">Aún no agregas ningún platillo</h1>
+	{% endif %}
 </body>
 </html>
