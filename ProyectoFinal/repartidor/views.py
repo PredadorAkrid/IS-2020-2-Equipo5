@@ -97,7 +97,7 @@ def comenzar_entrega(request, pk):
     return redirect('repartidor:ordenes_asignadas')
 
 #Función que permite a un repartidor finalizar la entrega de una órden.
-#Cambia el estado de la orden a "5:"
+#Cambia el estado de la orden a "5: Entregada"
 @staff_member_required
 def finalizar_entrega(request, pk):
     orden_terminada = Orden.objects.get(id_orden=pk)

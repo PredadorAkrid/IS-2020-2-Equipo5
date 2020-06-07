@@ -31,5 +31,8 @@ urlpatterns = [
     #path('cart/cart_clear/', views.cart_clear, name='cart_clear'),
     # path('cart/cart-detail/',views.cart_detail,name='cart_detail'),
 
+    path("historial_ordenes/", views.historial_ordenes, name="historial_ordenes"),
+    path("ordenes_activas/", views.ordenes_activas, name="ordenes_activas"),
+
 
 ]

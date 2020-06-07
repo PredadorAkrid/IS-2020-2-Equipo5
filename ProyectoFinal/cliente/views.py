@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth.models import *
+from administrador.models import Orden, EstadoOrden
 from django.contrib.auth import authenticate, login, logout
 from .forms import *
 from .models import *
@@ -168,3 +169,21 @@ def confirmar(request):
             return HttpResponse("Direccion Seleccionada: " + direccion_seleccionada)
 
     return HttpResponse("Ocurrio un error interno, intentalo más tarde")
+
+#Funcion que permite al cliente visualizar sus historial de órdenes
+@login_required
+def historial_ordenes(request):
+    cliente = Cliente.objects.get(user_cliente=request.user)
+    estado = EstadoOrden.objects.get(id_estado=5)
+    ordenes = Orden.objects.filter(id_cliente_orden=cliente, id_estado_orden=estado).order_by('id_orden')
+    contexto = {'ordenes' : ordenes}
+    return render(request, "cliente/historial_ordenes.html", contexto)
+
+#Funcion que permite al cliente visualizar las ordenes que aún no le han sido entregadas
+@login_required
+def ordenes_activas(request):
+    cliente = Cliente.objects.get(user_cliente=request.user)
+    estado = EstadoOrden.objects.get(id_estado=5)
+    ordenes = Orden.objects.filter(id_cliente_orden=cliente).exclude(id_estado_orden=estado).order_by('id_orden')
+    contexto = {'ordenes' : ordenes}
+    return render(request, "cliente/ordenes_activas.html", contexto)
