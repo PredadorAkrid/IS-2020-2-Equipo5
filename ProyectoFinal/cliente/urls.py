@@ -24,6 +24,7 @@ urlpatterns = [
     path('cart/item_clear/confirmar/', views.confirmar, name='confirmar'),
     path('ver_menu/', views.ver_menu, name="ver_menu"),
 
+
     # path('cart/item_increment/<int:id>/',
     #     views.item_increment, name='item_increment'),
     # path('cart/item_decrement/<int:id>/',

@@ -11,6 +11,8 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import *
 from .models import *
 from repartidor.models import *
+
+from administrador.models import *
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 
@@ -164,7 +166,27 @@ def confirmar(request):
                 return redirect('cliente:confirmar')
         if 'seleccion' in request.POST:
             # Aquí ya puedes redirigir a donde quieras con la informacion de post dejo una pagina de prueba (el post te va a mandar el id de la direccion)
+            estado_orden = EstadoOrden.objects.filter(id_estado = 1).first()
+
+            print(estado_orden)
             direccion_seleccionada = request.POST.get("seleccion", "")
-            return HttpResponse("Direccion Seleccionada: " + direccion_seleccionada)
+            direccion_final = Direccion.objects.filter(id_direccion = direccion_seleccionada).first()
+            carrito = Carrito.objects.filter(id_cliente_carrito=cliente.id_cliente).all()
+            contador_precio = 0
+            for elem in carrito:
+                platillo_carrito_cliente = Platillo.objects.filter(id=elem.id_platillo_carrito).first()
+                contador_precio += platillo_carrito_cliente.precio
+            print(contador_precio)           
+            orden_generada = Orden(precio_orden=contador_precio, id_cliente_orden = cliente, id_estado_orden=estado_orden, direccion_entrega_orden = direccion_final)
+            orden_generada.save()
+            for elem in carrito:
+                platillo_carrito_cliente = Platillo.objects.filter(id=elem.id_platillo_carrito).first()
+                orden_generada.id_platillo_orden.add(platillo_carrito_cliente)
+            print(orden_generada)
+            orden_generada.save()
+            for elem in carrito:
+                Carrito.objects.filter(id_platillo_carrito=elem.id_platillo_carrito, id_cliente_carrito=elem.id_cliente_carrito).delete()
+            return HttpResponse("Gracias por tu compra, estamos procesando tu compra, tú número de pedido es: " + str(orden_generada.id_orden))
 
     return HttpResponse("Ocurrio un error interno, intentalo más tarde")
+
