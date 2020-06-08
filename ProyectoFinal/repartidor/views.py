@@ -55,7 +55,7 @@ class RegistroRepartidor(View):
 
         userRepartidor.save()
 
-        mail_subject = "Registro existoso | Delivery&Eats"
+        mail_subject = "Registro existoso | Deliver&Eats"
         mail_message = render_to_string("repartidor/registro-repartidor-email.html",{
             'user' : userRepartidor,
             'password': cont
