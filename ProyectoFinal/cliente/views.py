@@ -46,7 +46,7 @@ class RegistroCliente(View):
         user2.save()
         return HttpResponse("<h1>Cliente creado</h1>")
 
-
+##Función que carga el login
 class Index(View):
     def get(self, request):
         form = InicioSesionForm()
@@ -82,7 +82,7 @@ class Index(View):
             else:
                 return render("<h1>asdads</h1>")
 
-
+#Función para ver el menú de platillos
 @login_required
 def ver_menu(request):
     platillos = Platillo.objects.all()
@@ -95,12 +95,13 @@ def HomeCliente(request):
     if request.method == "GET":
         return render(request, "cliente/home.html")
 
-
+#Clase para cerrar sesión del usuario
 class CerrarSesion(View):
     def get(self, request):
         logout(request)
         return redirect("cliente:IndexCliente")
 
+#Función para cargar el carrito de compras
 
 @login_required
 def CarritoView(request):
@@ -116,9 +117,11 @@ def CarritoView(request):
         context = {'carrito': carrito}
         return render(request, "cliente/checkout.html", context)
 
+#Función para agregar un platillo al carrito
 
 @login_required
-def cart_add(request, pk):
+def agregar_al_carrito(request, pk):
+    # Obtenemos el usuario
     user = request.user
     user_1 = User.objects.get(id=user.id)
     cliente = Cliente.objects.filter(user_cliente=user_1).first()
@@ -132,9 +135,11 @@ def cart_add(request, pk):
        pass
     return redirect('cliente:carrito')
 
+# Función para quitar un platillo del carrito
 
 @login_required
-def item_clear(request, pk):
+def quitar_del_carrito(request, pk):
+    # Obtenemos al usuario
     user = request.user
     user_1 = User.objects.get(id=user.id)
     cliente = Cliente.objects.filter(user_cliente=user_1).first()
@@ -143,14 +148,15 @@ def item_clear(request, pk):
                            id_cliente_carrito=cliente.id_cliente).delete()
     return redirect('cliente:carrito')
 
+#Función para confirmar la compra
 
 @login_required
 def confirmar(request):
+    # Obtenemos el usuario que manda la petición
     user = request.user
     user_1 = User.objects.get(id=user.id)
     cliente = Cliente.objects.filter(user_cliente=user_1).first()
     cliente_id = cliente.id_cliente
-    # Aquí podrías obtener las direcciones del usuario para ponerlas en un form o algo así
 
     # Usamos get para mostrar las direcciones del usuario
     if request.method == 'GET':
@@ -159,7 +165,7 @@ def confirmar(request):
         contexto = {"formulario": formulario,
                     "direcciones": direcciones, "cliente": cliente}
         return render(request, "cliente/agregar_seleccionar_direccion.html", contexto)
-
+    # Usamos post para guardar la nueva dirección del cliente 
     if request.method == 'POST':
         if 'agregar' in request.POST:
             formulario = AgregarDireccion(request.POST)
@@ -169,7 +175,7 @@ def confirmar(request):
                 formulario.save()
                 return redirect('cliente:confirmar')
         if 'seleccion' in request.POST:
-            # Aquí ya puedes redirigir a donde quieras con la informacion de post dejo una pagina de prueba (el post te va a mandar el id de la direccion)
+            # Aquí ya estamos seleccionando una dirección existente de entrega y generando la orden con el carrito de compras existente
             estado_orden = EstadoOrden.objects.filter(id_estado = 1).first()
 
             print(estado_orden)
