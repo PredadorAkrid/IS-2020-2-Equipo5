@@ -12,7 +12,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import user_passes_test
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
-from cliente.models import * 
+from cliente.models import *
 from platillo.models import *
 def superuser_only(function):
     def _inner(request, *args, **kwargs):
@@ -59,13 +59,13 @@ def editar_orden(request,  pk):
     # Si es una petición post entonces guardamos los datos del formulario
     elif request.method == 'POST':
         # validamos el form
-        
-    
-        rep = Repartidor.objects.filter(id_repatidor = request.POST['id_repartidor_orden']).first()
-        orden_a_editar.id_repartidor_orden = rep
+
+        #depreciamos el rapartidor
+        #rep = Repartidor.objects.filter(id_repatidor = request.POST['id_repartidor_orden']).first()
+        #orden_a_editar.id_repartidor_orden = rep
         est = EstadoOrden.objects.filter(id_estado = request.POST['id_estado_orden']).first()
         orden_a_editar.id_estado_orden =  est
-        
+
         orden_a_editar.id_platillo_orden.clear()
         precio  = 0
         for id_aux in request.POST.getlist('id_platillo_orden'):
