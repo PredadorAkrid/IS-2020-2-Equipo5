@@ -64,7 +64,7 @@ class RegistroRepartidor(View):
         email = EmailMessage(mail_subject, mail_message, to=[to_email])
         email.send()
 
-        return HttpResponse("<h1>Repartidor registrado</h1>")
+        return redirect('administrador:IndexAdministrador')
 
 # Función que despliega la lista de ordenes listas para recolección
 @staff_member_required

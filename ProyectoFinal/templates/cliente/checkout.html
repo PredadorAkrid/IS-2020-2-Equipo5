@@ -7,7 +7,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Lista de órdenes</title>
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/cliente/carrito-checkout.css' %}">
 </head>
 <body>
 	<div class="return-btn" style="text-align: start">
@@ -38,15 +37,15 @@
 						<a class="btn btn-danger" href="{% url 'cliente:item_clear' item.id_platillo_carrito %}">Eliminar</a>	
 					</td>
 				</tr>
-				{% endfor %}
-				<br>
-				<br>
-			<a class="btn btn-primary" href="{% url 'cliente:confirmar' %}" >Confirmar</a> 	
-			{% else %}
-			<h1 align="center">Aún no agregas ningún platillo</h1>
-			{% endif %}	
+				{% endfor %}			
 		</tbody>
 	</table>
+		{% else %}
+			<h1 align="center">Aún no agregas ningún platillo</h1>
+		{% endif %}
+		{% if carrito %}
+			<a class="btn btn-primary" href="{% url 'cliente:confirmar' %}" >Confirmar</a> 	
+		{% endif %}
 	</div>
 </body>
 </html>
