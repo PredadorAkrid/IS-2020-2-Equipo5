@@ -28,23 +28,25 @@
 		</thead>
 		<tbody>
 			{% if carrito %}
-			{% for item in carrito%}
-			<tr>
-				<td></td>
-				<td>{{item.id_platillo_carrito}}</td>
-				<td>{{item.nombre_platillo_carrito}}</td>
-				<td>{{item.precio_platillo_carrito}}</td>
-				<td>
-					<a class="btn btn-danger" href="{% url 'cliente:item_clear' item.id_platillo_carrito %}">Eliminar</a>	
-				</td>
-			</tr>
-			{% endfor %}
+				{% for item in carrito%}
+				<tr>
+					<td></td>
+					<td>{{item.id_platillo_carrito}}</td>
+					<td>{{item.nombre_platillo_carrito}}</td>
+					<td>{{item.precio_platillo_carrito}}</td>
+					<td>
+						<a class="btn btn-danger" href="{% url 'cliente:item_clear' item.id_platillo_carrito %}">Eliminar</a>	
+					</td>
+				</tr>
+				{% endfor %}
+				<br>
+				<br>
+			<a class="btn btn-primary" href="{% url 'cliente:confirmar' %}" >Confirmar</a> 	
 			{% else %}
 			<h1 align="center">Aún no agregas ningún platillo</h1>
 			{% endif %}	
 		</tbody>
 	</table>
-	<a class="btn btn-primary" href="{% url 'cliente:confirmar' %}" >Confirmar</a> 	
 	</div>
 </body>
 </html>

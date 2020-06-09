@@ -123,9 +123,13 @@ def cart_add(request, pk):
     user_1 = User.objects.get(id=user.id)
     cliente = Cliente.objects.filter(user_cliente=user_1).first()
     product = Platillo.objects.get(id=pk)
-    agregado_carrito = Carrito(id_platillo_carrito=product.id, nombre_platillo_carrito=product.nombre,
+    ya_agregado = Carrito.objects.filter(id_platillo_carrito=product.id,id_cliente_carrito=cliente.id_cliente).exists()
+    if(ya_agregado == False):
+        agregado_carrito = Carrito(id_platillo_carrito=product.id, nombre_platillo_carrito=product.nombre,
                                id_cliente_carrito=cliente.id_cliente, precio_platillo_carrito=product.precio)
-    agregado_carrito.save()
+        agregado_carrito.save()
+    else:
+       pass
     return redirect('cliente:carrito')
 
 
