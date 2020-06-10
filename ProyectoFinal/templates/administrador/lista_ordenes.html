@@ -7,66 +7,66 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Lista de órdenes</title>
-	
-	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-	<link rel="stylesheet" href="{% static 'css/ordenes/lista_ordenes.css' %}">
+
+	<link rel="stylesheet" href="{% static 'css/ordenes/tabla_ordenes.css' %}">
+	<link rel="stylesheet" href="{% static 'css/ordenes/ordenes_admin.css' %}">
 
 </head>
 <body>
-<div class="return-btn" style="text-align: start">
-<a class="btn btn-primary" href="../../../administrador/">Volver</a>
-</div>
-<div class="container">
+    <div class="boton">
+        <a id="boton-volver" href="{% url 'administrador:IndexAdministrador' %}">&laquo; Volver</a>
+    </div>
 
-<table class="table table-bordered">
+    <div class="contenedor">
 
-	<thead>
+        <h1 id="bienvenida">Lista de órdenes</h1>
+        <h3>Aquí tienes todas las ordenes realizadas por tus clientes</h3>
 
-		<tr>
-			<td>#</td>
-			<td>Numero de orden</td>
-			<td>Precio</td>
-			<td>Cliente</td>
-			<td>Repartidor</td>
-			<td>Platillos</td>
-			<td>Estado Orden</td>
-			<td>Direccion</td>
-			<td>Acciones</td>	
-		</tr>
-		
-	</thead>
-	<tbody>
-		{% if ordenes %}
-		{% for orden in ordenes%}
-		<tr>
-			<td></td>
-			<td>{{orden.id_orden}}</td>
-			<td>{{orden.precio_orden}}</td>
-			<td>{{orden.id_cliente_orden}}</td>
-			<td>{{orden.id_repartidor_orden}}</td>
-			<td>
-			{% for platillo in orden.id_platillo_orden.all %}
-				{{platillo}}
-			{% endfor %}
-			</td>
-			<td>{{orden.id_estado_orden}}</td>
-			<td>{{orden.direccion_entrega_orden}}</td>
-			<td>
-				<a class="btn btn-primary" href="{% url 'administrador:editar_orden' orden.id_orden %}">Editar</a>
-				<a class="btn btn-danger" href="{% url 'administrador:eliminar_orden' orden.id_orden %}">Eliminar</a>	
-			</td>
-		</tr>
-		{% endfor %}
-		{% else %}
-		<h1 align="center">No existen ordenes generadas</h1>
+        <table class="content-table">
 
-		{% endif %}
-	
-	</tbody>
-</table> 
-	
-</div>
+        	<thead>
 
+        		<tr>
+        			<td>#</td>
+        			<td>Precio</td>
+        			<td>Cliente</td>
+        			<td>Repartidor</td>
+        			<td>Platillos</td>
+        			<td>Estado Orden</td>
+        			<td>Direccion</td>
+        			<td>Acciones</td>
+        		</tr>
 
+        	</thead>
+        	<tbody>
+        		{% if ordenes %}
+        		{% for orden in ordenes%}
+        		<tr>
+        			<td>{{orden.id_orden}}</td>
+        			<td>${{orden.precio_orden}}.00</td>
+        			<td>{{orden.id_cliente_orden}}</td>
+        			<td>{{orden.id_repartidor_orden}}</td>
+        			<td>
+        			{% for platillo in orden.id_platillo_orden.all %}
+        				{{platillo}}
+                        <br>
+        			{% endfor %}
+        			</td>
+        			<td>{{orden.id_estado_orden}}</td>
+        			<td>{{orden.direccion_entrega_orden}}</td>
+        			<td>
+        				<a class="boton-admin" id="editar" href="{% url 'administrador:editar_orden' orden.id_orden %}">Editar</a>
+        				<a class="boton-admin" id="eliminar" href="{% url 'administrador:eliminar_orden' orden.id_orden %}">Eliminar</a>
+        			</td>
+        		</tr>
+        		{% endfor %}
+        		{% else %}
+        		<h1 align="center">No existen ordenes generadas</h1>
+
+        		{% endif %}
+
+        	</tbody>
+        </table>
+    </div>
 </body>
 </html>

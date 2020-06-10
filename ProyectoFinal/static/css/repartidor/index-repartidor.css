@@ -1,30 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
-
 html,body{
     margin:0;
     padding:0;
     height:100%;
     width:100%;
     overflow:hidden;
-}
-
-body{
-    background-image: url("/static/imagenes/Repartidor-fondo3.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    text-align: center;
-    font-family: 'Quicksand', sans-serif;
-}
-
-.contenedor{
-    height:100%;
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .contenedor-titulo{
@@ -34,57 +13,8 @@ body{
     align-items: center;
 }
 
-.contenedor-menu{
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 390px;
-    height: 450px;
-
-}
-
-.btn{
-    background-color: #f28b2a;
-    border-radius: 25px;
-    margin: 20px;
-    height: 50px;
-    width: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: inherit;
-    border: none;
-    text-decoration: none;
-}
-
-.btn:hover{
-    background-color: #39ac39;
-    box-shadow: 5px 10px 18px #888888;
-}
-
 #mensaje-bienvenida{
     letter-spacing: .1em;
     margin: 0 auto;
 
-}
-
-a:-webkit-any-link {
-	color: inherit;
-	text-decoration: none;
-}
-
-
-a:-moz-any-link {
-	color: inherit;
-	text-decoration: none;
-}
-
-
-a:any-link {
-	color: inherit;
-	text-decoration: none;
 }

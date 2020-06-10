@@ -6,15 +6,12 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{% static 'css/repartidor/registro-repartidor.css' %}">
-        <link rel="stylesheet" href="{% static 'css/repartidor/index-repartidor.css' %}">
 		<title>Registrar repartidor</title>
 	</head>
 	<body>
-
-        <div class="return-btn" style="text-align: start">
-        <a class="btn btn-primary" href="../../../administrador">Volver</a>
+        <div class="boton">
+                <a id="boton-volver" href="{% url 'administrador:IndexAdministrador' %}">&laquo; Volver</a>
         </div>
-		<h1 id="mensaje-bienvenida">Deliver&Eats</h1>
 
         <div class="contenedor">
             <div class="contenedor-menu">
@@ -31,7 +28,7 @@
 
         			</div>
         			{% endfor %}
-        			<input value="Registrar" type="submit" class="btn">
+        			<input value="Registrar" type="submit" class="btn" id="boton-registrar">
         		</form>
             </div>
         </div>

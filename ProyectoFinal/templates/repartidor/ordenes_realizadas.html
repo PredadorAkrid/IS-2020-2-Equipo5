@@ -41,12 +41,13 @@
         		<tr>
         			<td></td>
         			<td>{{orden.id_orden}}</td>
-        			<td>{{orden.precio_orden}}</td>
+        			<td>${{orden.precio_orden}}.00</td>
         			<td>{{orden.id_cliente_orden}}</td>
         			<td>{{orden.id_repartidor_orden}}</td>
         			<td>
         			{% for platillo in orden.id_platillo_orden.all %}
         				{{platillo}}
+                        <br>
         			{% endfor %}
         			</td>
         			<td>{{orden.id_estado_orden}}</td>
