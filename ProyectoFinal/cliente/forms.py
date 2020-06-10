@@ -130,8 +130,15 @@ class AgregarDireccion(forms.ModelForm):
     """Formulario para agregar una direccion"""
     descripcion_direccion = forms.CharField(
         label="direccion", max_length=200, required=True)
+    id_cliente = forms.ModelChoiceField(
+        queryset=Cliente.objects.filter(user_cliente=1))
 
     class Meta:
         db_table = "direccion"
         model = Direccion
         fields = ("descripcion_direccion", "id_cliente")
+
+    def __init__(self, user, *args, **kwargs):
+        super(AgregarDireccion, self).__init__(*args, **kwargs)
+        self.fields['id_cliente'].queryset = Cliente.objects.filter(
+            user_cliente=user)

@@ -204,7 +204,7 @@ form {
 
 form #first {
   display: grid;
-  grid-template-columns: 85% 15%;
+  grid-template-columns: auto auto;
   column-gap: 20px;
   row-gap: 5px;
 }

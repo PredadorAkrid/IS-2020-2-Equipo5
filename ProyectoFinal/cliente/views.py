@@ -46,7 +46,9 @@ class RegistroCliente(View):
         user2.save()
         return HttpResponse("<h1>Cliente creado</h1>")
 
-##Función que carga el login
+# Función que carga el login
+
+
 class Index(View):
     def get(self, request):
         form = InicioSesionForm()
@@ -82,7 +84,7 @@ class Index(View):
             else:
                 return render("<h1>asdads</h1>")
 
-#Función para ver el menú de platillos
+# Función para ver el menú de platillos
 @login_required
 def ver_menu(request):
     platillos = Platillo.objects.all()
@@ -95,13 +97,16 @@ def HomeCliente(request):
     if request.method == "GET":
         return render(request, "cliente/home.html")
 
-#Clase para cerrar sesión del usuario
+# Clase para cerrar sesión del usuario
+
+
 class CerrarSesion(View):
     def get(self, request):
         logout(request)
         return redirect("cliente:IndexCliente")
 
-#Función para cargar el carrito de compras
+# Función para cargar el carrito de compras
+
 
 @login_required
 def CarritoView(request):
@@ -117,7 +122,8 @@ def CarritoView(request):
         context = {'carrito': carrito}
         return render(request, "cliente/checkout.html", context)
 
-#Función para agregar un platillo al carrito
+# Función para agregar un platillo al carrito
+
 
 @login_required
 def agregar_al_carrito(request, pk):
@@ -126,16 +132,18 @@ def agregar_al_carrito(request, pk):
     user_1 = User.objects.get(id=user.id)
     cliente = Cliente.objects.filter(user_cliente=user_1).first()
     product = Platillo.objects.get(id=pk)
-    ya_agregado = Carrito.objects.filter(id_platillo_carrito=product.id,id_cliente_carrito=cliente.id_cliente).exists()
+    ya_agregado = Carrito.objects.filter(
+        id_platillo_carrito=product.id, id_cliente_carrito=cliente.id_cliente).exists()
     if(ya_agregado == False):
         agregado_carrito = Carrito(id_platillo_carrito=product.id, nombre_platillo_carrito=product.nombre,
-                               id_cliente_carrito=cliente.id_cliente, precio_platillo_carrito=product.precio)
+                                   id_cliente_carrito=cliente.id_cliente, precio_platillo_carrito=product.precio)
         agregado_carrito.save()
     else:
-       pass
+        pass
     return redirect('cliente:carrito')
 
 # Función para quitar un platillo del carrito
+
 
 @login_required
 def quitar_del_carrito(request, pk):
@@ -148,7 +156,8 @@ def quitar_del_carrito(request, pk):
                            id_cliente_carrito=cliente.id_cliente).delete()
     return redirect('cliente:carrito')
 
-#Función para confirmar la compra
+# Función para confirmar la compra
+
 
 @login_required
 def confirmar(request):
@@ -161,14 +170,14 @@ def confirmar(request):
     # Usamos get para mostrar las direcciones del usuario
     if request.method == 'GET':
         direcciones = Direccion.objects.filter(id_cliente=cliente)
-        formulario = AgregarDireccion()
+        formulario = AgregarDireccion(user_1)
         contexto = {"formulario": formulario,
                     "direcciones": direcciones, "cliente": cliente}
         return render(request, "cliente/agregar_seleccionar_direccion.html", contexto)
-    # Usamos post para guardar la nueva dirección del cliente 
+    # Usamos post para guardar la nueva dirección del cliente
     if request.method == 'POST':
         if 'agregar' in request.POST:
-            formulario = AgregarDireccion(request.POST)
+            formulario = AgregarDireccion(user_1, request.POST)
             if formulario.is_valid():
                 id_cliente = formulario.cleaned_data["id_cliente"]
                 descripcion_direccion = formulario.cleaned_data["descripcion_direccion"]
@@ -176,48 +185,55 @@ def confirmar(request):
                 return redirect('cliente:confirmar')
         if 'seleccion' in request.POST:
             # Aquí ya estamos seleccionando una dirección existente de entrega y generando la orden con el carrito de compras existente
-            estado_orden = EstadoOrden.objects.filter(id_estado = 1).first()
+            estado_orden = EstadoOrden.objects.filter(id_estado=1).first()
 
             print(estado_orden)
             direccion_seleccionada = request.POST.get("seleccion", "")
-            direccion_final = Direccion.objects.filter(id_direccion = direccion_seleccionada).first()
-            carrito = Carrito.objects.filter(id_cliente_carrito=cliente.id_cliente).all()
+            direccion_final = Direccion.objects.filter(
+                id_direccion=direccion_seleccionada).first()
+            carrito = Carrito.objects.filter(
+                id_cliente_carrito=cliente.id_cliente).all()
             contador_precio = 0
             for elem in carrito:
-                platillo_carrito_cliente = Platillo.objects.filter(id=elem.id_platillo_carrito).first()
+                platillo_carrito_cliente = Platillo.objects.filter(
+                    id=elem.id_platillo_carrito).first()
                 contador_precio += platillo_carrito_cliente.precio
             print(contador_precio)
-            orden_generada = Orden(precio_orden=contador_precio, id_cliente_orden = cliente, id_estado_orden=estado_orden, direccion_entrega_orden = direccion_final)
+            orden_generada = Orden(precio_orden=contador_precio, id_cliente_orden=cliente,
+                                   id_estado_orden=estado_orden, direccion_entrega_orden=direccion_final)
             orden_generada.save()
             for elem in carrito:
-                platillo_carrito_cliente = Platillo.objects.filter(id=elem.id_platillo_carrito).first()
+                platillo_carrito_cliente = Platillo.objects.filter(
+                    id=elem.id_platillo_carrito).first()
                 orden_generada.id_platillo_orden.add(platillo_carrito_cliente)
             print(orden_generada)
             orden_generada.save()
             for elem in carrito:
-                Carrito.objects.filter(id_platillo_carrito=elem.id_platillo_carrito, id_cliente_carrito=elem.id_cliente_carrito).delete()
+                Carrito.objects.filter(id_platillo_carrito=elem.id_platillo_carrito,
+                                       id_cliente_carrito=elem.id_cliente_carrito).delete()
             x = str(orden_generada.id_orden)
             contexto = {'x': x}
             return render(request, "cliente/confirmacion.html", contexto)
 
+    return HttpResponse("Ocurrio un error interno, intentalo más tarde o agrega una dirección distinta")
 
-    return HttpResponse("Ocurrio un error interno, intentalo más tarde")
 
-
-#Funcion que permite al cliente visualizar sus historial de órdenes
+# Funcion que permite al cliente visualizar sus historial de órdenes
 @login_required
 def historial_ordenes(request):
     cliente = Cliente.objects.get(user_cliente=request.user)
     estado = EstadoOrden.objects.get(id_estado=5)
-    ordenes = Orden.objects.filter(id_cliente_orden=cliente, id_estado_orden=estado).order_by('id_orden')
-    contexto = {'ordenes' : ordenes}
+    ordenes = Orden.objects.filter(
+        id_cliente_orden=cliente, id_estado_orden=estado).order_by('id_orden')
+    contexto = {'ordenes': ordenes}
     return render(request, "cliente/historial_ordenes.html", contexto)
 
-#Funcion que permite al cliente visualizar las ordenes que aún no le han sido entregadas
+# Funcion que permite al cliente visualizar las ordenes que aún no le han sido entregadas
 @login_required
 def ordenes_activas(request):
     cliente = Cliente.objects.get(user_cliente=request.user)
     estado = EstadoOrden.objects.get(id_estado=5)
-    ordenes = Orden.objects.filter(id_cliente_orden=cliente).exclude(id_estado_orden=estado).order_by('id_orden')
-    contexto = {'ordenes' : ordenes}
+    ordenes = Orden.objects.filter(id_cliente_orden=cliente).exclude(
+        id_estado_orden=estado).order_by('id_orden')
+    contexto = {'ordenes': ordenes}
     return render(request, "cliente/ordenes_activas.html", contexto)
