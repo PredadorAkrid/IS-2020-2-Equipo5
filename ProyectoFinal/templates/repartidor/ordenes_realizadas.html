@@ -24,7 +24,6 @@
         	<thead>
 
         		<tr>
-        			<td>#</td>
         			<td>Numero de orden</td>
         			<td>Precio</td>
         			<td>Cliente</td>
@@ -39,7 +38,6 @@
         		{% if ordenes %}
         		{% for orden in ordenes%}
         		<tr>
-        			<td></td>
         			<td>{{orden.id_orden}}</td>
         			<td>${{orden.precio_orden}}.00</td>
         			<td>{{orden.id_cliente_orden}}</td>

@@ -1,9 +1,14 @@
 {% load static %}
 <title>Deliver&Eats | Crear Platillo</title>
-<link rel="stylesheet" type="text/css" href={% static 'css/categoria/seleccionar_categoria.css'%}> 
+<link rel="stylesheet" type="text/css" href={% static 'css/categoria/seleccionar_categoria.css'%}>
 <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
 
 <body>
+
+    <div class="boton">
+        <a id="boton-volver" href="{% url 'categoria:IndexCategoria' %}">&laquo; Volver</a>
+    </div>
+
   <h1>Selecciona la categoria deseada</h1>
 
   <div id="container">

@@ -55,7 +55,7 @@ def crear_categoria(request):
 # Función para listar las categorías existentes
 def lista_categoria(request):
     # Obtenemos el queryset de las categorías ordenadas alfabéticamente
-    categorias = Categoria.objects.all().order_by('nombre_categoria')
+    categorias = Categoria.objects.all().order_by('id_categoria')
     # Asignamos al contexto el queryset
     contexto = {'categorias': categorias}
     # Cargamos el html con la lista de categorías
