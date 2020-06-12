@@ -44,8 +44,7 @@ class RegistroCliente(View):
             telefono_cliente=form.cleaned_data["telefono"],
         )
         user2.save()
-        return HttpResponse("<h1>Cliente creado</h1>")
-
+        return redirect("cliente:IndexCliente")
 # Función que carga el login
 
 
@@ -116,9 +115,15 @@ def CarritoView(request):
         print(user_1)
         cliente = Cliente.objects.filter(user_cliente=user_1).first()
         print(cliente)
+        
         carrito = Carrito.objects.filter(
             id_cliente_carrito=cliente.id_cliente).all()
-
+        for elem in carrito:
+            platillo_activo = Platillo.objects.filter(id=elem.id_platillo_carrito).exists()
+            if(platillo_activo == False):
+                Carrito.objects.filter(id_platillo_carrito=elem.id_platillo_carrito,id_cliente_carrito=cliente.id_cliente).delete()   
+        carrito = Carrito.objects.filter(
+            id_cliente_carrito=cliente.id_cliente).all()
         context = {'carrito': carrito}
         return render(request, "cliente/checkout.html", context)
 
