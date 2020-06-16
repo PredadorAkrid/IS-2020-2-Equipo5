@@ -70,7 +70,8 @@ class ClienteRegistroForm(UserCreationForm):
             'id': 'id_telefono',
             'class': 'input100',
             'name': 'telefono',
-            'placeholder': 'Telefono'})
+            'placeholder': 'Telefono',
+            'pattern' : '[0-9]+',})
         self.fields['email'].widget = TextInput(attrs={
             'id': 'id_email',
             'class': 'input100',
