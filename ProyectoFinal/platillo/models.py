@@ -18,7 +18,7 @@ class Platillo(models.Model):
     nombre = models.CharField(max_length=200, unique=True)
     descripcion = models.CharField(max_length=500, null=True)
     precio = models.FloatField(null=False, default=0)
-    imagen = models.ImageField(null=True, upload_to=directorio_imagen)
+    imagen = models.ImageField(null=False, upload_to=directorio_imagen)
     categoria = models.ForeignKey(
         'categoria.Categoria', on_delete=models.CASCADE)
 

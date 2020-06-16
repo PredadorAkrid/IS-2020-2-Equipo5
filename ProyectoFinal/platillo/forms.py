@@ -14,7 +14,7 @@ class FormularioCrearPlatillo(forms.ModelForm):
         attrs={'class': 'campoDescripcion', 'name': 'descripcion'}))
     precio = forms.FloatField(label="precio", required=True, widget=forms.NumberInput(
         attrs={'class': 'campo', 'name': 'precio'}))
-    imagen = forms.FileField(label="imagen", required=False)
+    imagen = forms.FileField(label="imagen", required=True)
     categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(
     ), empty_label="Selecciona la categoria")
 
@@ -49,7 +49,7 @@ class FormularioEditarPlatillo(forms.ModelForm):
         attrs={'class': 'campoDescripcion', 'name': 'descripcion'}))
     precio = forms.FloatField(label="precio", required=True, widget=forms.NumberInput(
         attrs={'class': 'campo', 'name': 'precio'}))
-    imagen = forms.FileField(label="imagen", required=False, widget=FileInput)
+    imagen = forms.FileField(label="imagen", required=True, widget=FileInput)
 
     class Meta:
         db_table = "platillo"
