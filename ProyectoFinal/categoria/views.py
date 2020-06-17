@@ -68,11 +68,12 @@ def selecciona_categoria(request):
 
     template = 'categoria/seleccion_categoria.html'
     template_editar = 'categoria/editar_categoria.html'
-
+    #cargamos las categorias
     if request.method == 'GET':
         formulario = FormularioSeleccionCategoria()
         contexto = {"formulario": formulario}
         return render(request, template, contexto)
+    #editamos o eliminamos la categoria
     elif request.method == 'POST':
         formulario = FormularioSeleccionCategoria(request.POST)
         if formulario.is_valid():
@@ -85,6 +86,7 @@ def selecciona_categoria(request):
                 return redirect('categoria:eliminar_categoria')
     return HttpResponse("Error al seleccionar la categoria")
 
+#función para editar  la categoria
 
 @login_required
 def editar_categoria(request):
@@ -110,14 +112,9 @@ def editar_categoria(request):
             categoria_original.nombre_categoria = nombre
             formulario.save()
             return redirect('categoria:selecciona_categoria')
-        #if formulario.is_valid():
-        #    nombre = formulario.cleaned_data["nombre_categoria"]
-        #    categoria_original.nombre_categoria = nombre
-        #    formulario.save()
-        #    return redirect('categoria:selecciona_categoria')
-        #return render(request, 'categoria/editar_categoria.html', {'form': formulario})
+        
 
-
+#función para eliminar la categoría
 @login_required
 def eliminar_categoria(request):
     template = "categoria/eliminar_categoria.html"

@@ -161,8 +161,11 @@ def quitar_del_carrito(request, pk):
                            id_cliente_carrito=cliente.id_cliente).delete()
     return redirect('cliente:carrito')
 
-# Función para confirmar la compra
-
+# Función para confirmar la compra, se requiere por parte del usuario
+# que cree y seleccione la dirección de entrega en caso de no existir o simplemente
+# seleccione una ya existente
+# para generar la orden debemos obtener todos los datos del usuario así como los platillos
+# que tiene agregado a su carrito
 
 @login_required
 def confirmar(request):
@@ -191,8 +194,6 @@ def confirmar(request):
         if 'seleccion' in request.POST:
             # Aquí ya estamos seleccionando una dirección existente de entrega y generando la orden con el carrito de compras existente
             estado_orden = EstadoOrden.objects.filter(id_estado=1).first()
-
-            print(estado_orden)
             direccion_seleccionada = request.POST.get("seleccion", "")
             direccion_final = Direccion.objects.filter(
                 id_direccion=direccion_seleccionada).first()
@@ -203,7 +204,6 @@ def confirmar(request):
                 platillo_carrito_cliente = Platillo.objects.filter(
                     id=elem.id_platillo_carrito).first()
                 contador_precio += platillo_carrito_cliente.precio
-            print(contador_precio)
             orden_generada = Orden(precio_orden=contador_precio, id_cliente_orden=cliente,
                                    id_estado_orden=estado_orden, direccion_entrega_orden=direccion_final)
             orden_generada.save()
@@ -211,7 +211,6 @@ def confirmar(request):
                 platillo_carrito_cliente = Platillo.objects.filter(
                     id=elem.id_platillo_carrito).first()
                 orden_generada.id_platillo_orden.add(platillo_carrito_cliente)
-            print(orden_generada)
             orden_generada.save()
             for elem in carrito:
                 Carrito.objects.filter(id_platillo_carrito=elem.id_platillo_carrito,
