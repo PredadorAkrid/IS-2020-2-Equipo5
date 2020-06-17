@@ -23,6 +23,13 @@ input{
     padding-left: 10px;
 }
 
+ul{
+    list-style-type: none;
+    width: 250px;
+    padding-left: 0;
+    text-align: center;
+}
+
 .contenedor{
     height:100%;
     width:100%;
